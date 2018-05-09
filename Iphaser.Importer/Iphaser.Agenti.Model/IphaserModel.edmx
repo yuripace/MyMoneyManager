@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="iphaserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategorieIphase">
+          <Key>
+            <PropertyRef Name="IDVoce" />
+          </Key>
+          <Property Name="IDVoce" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="Tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="CategorieUbiBanca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Keywords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Keyword" Type="varchar" MaxLength="50" />
+          <Property Name="IDVoce_Code" Type="nchar" MaxLength="10" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movimenti">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataContabile" Type="datetime" />
+          <Property Name="DataValuta" Type="datetime" />
+          <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Divisa" Type="varchar" MaxLength="5" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="500" />
+          <Property Name="Causale" Type="varchar" MaxLength="255" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="IDCategoriaIphase" Type="int" />
+        </EntityType>
+        <EntityType Name="PagamentiIphase">
+          <Key>
+            <PropertyRef Name="IDPagamento" />
+          </Key>
+          <Property Name="IDPagamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="Chebanca" Type="varchar" MaxLength="255" />
+          <Property Name="UbiBanca" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_CategorieUbiBanca_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="1" />
+          <End Role="CategorieUbiBanca1" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategorieUbiBanca1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="iphaserModelStoreContainer">
+          <EntitySet Name="CategorieIphase" EntityType="Self.CategorieIphase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategorieUbiBanca" EntityType="Self.CategorieUbiBanca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Keywords" EntityType="Self.Keywords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimenti" EntityType="Self.Movimenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategorieUbiBanca_CategorieUbiBanca" Association="Self.FK_CategorieUbiBanca_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="CategorieUbiBanca1" EntitySet="CategorieUbiBanca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="Self.FK_Movimenti_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="iphaserModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategorieIphase">
+          <Key>
+            <PropertyRef Name="IDVoce" />
+          </Key>
+          <Property Name="IDVoce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CategorieUbiBanca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategorieUbiBanca1" Relationship="iphaserModel.FK_CategorieUbiBanca_CategorieUbiBanca" FromRole="CategorieUbiBanca" ToRole="CategorieUbiBanca1" />
+          <NavigationProperty Name="CategorieUbiBanca2" Relationship="iphaserModel.FK_CategorieUbiBanca_CategorieUbiBanca" FromRole="CategorieUbiBanca1" ToRole="CategorieUbiBanca" />
+          <NavigationProperty Name="Movimenti" Relationship="iphaserModel.FK_Movimenti_CategorieUbiBanca" FromRole="CategorieUbiBanca" ToRole="Movimenti" />
+        </EntityType>
+        <EntityType Name="Keywords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDVoce_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="PagamentiIphase">
+          <Key>
+            <PropertyRef Name="IDPagamento" />
+          </Key>
+          <Property Name="IDPagamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Chebanca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UbiBanca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="IphaserEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategorieIphase" EntityType="Self.CategorieIphase" />
+          <EntitySet Name="CategorieUbiBanca" EntityType="Self.CategorieUbiBanca" />
+          <EntitySet Name="Keywords" EntityType="Self.Keywords" />
+          <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" />
+          <AssociationSet Name="FK_CategorieUbiBanca_CategorieUbiBanca" Association="iphaserModel.FK_CategorieUbiBanca_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="CategorieUbiBanca1" EntitySet="CategorieUbiBanca" />
+          </AssociationSet>
+          <EntitySet Name="Movimenti" EntityType="iphaserModel.Movimenti" />
+          <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="iphaserModel.FK_Movimenti_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_CategorieUbiBanca_CategorieUbiBanca">
+          <End Type="iphaserModel.CategorieUbiBanca" Role="CategorieUbiBanca" Multiplicity="1" />
+          <End Type="iphaserModel.CategorieUbiBanca" Role="CategorieUbiBanca1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategorieUbiBanca1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Movimenti">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataContabile" Type="DateTime" Precision="3" />
+          <Property Name="DataValuta" Type="DateTime" Precision="3" />
+          <Property Name="Importo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Divisa" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Descrizione" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Causale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="IDCategoriaIphase" Type="Int32" />
+          <NavigationProperty Name="CategorieUbiBanca" Relationship="iphaserModel.FK_Movimenti_CategorieUbiBanca" FromRole="Movimenti" ToRole="CategorieUbiBanca" />
+        </EntityType>
+        <Association Name="FK_Movimenti_CategorieUbiBanca">
+          <End Type="iphaserModel.CategorieUbiBanca" Role="CategorieUbiBanca" Multiplicity="0..1" />
+          <End Type="iphaserModel.Movimenti" Role="Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="iphaserModelStoreContainer" CdmEntityContainer="IphaserEntities">
+          <EntitySetMapping Name="CategorieIphase">
+            <EntityTypeMapping TypeName="iphaserModel.CategorieIphase">
+              <MappingFragment StoreEntitySet="CategorieIphase">
+                <ScalarProperty Name="IDVoce" ColumnName="IDVoce" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorieUbiBanca">
+            <EntityTypeMapping TypeName="iphaserModel.CategorieUbiBanca">
+              <MappingFragment StoreEntitySet="CategorieUbiBanca">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keywords">
+            <EntityTypeMapping TypeName="iphaserModel.Keywords">
+              <MappingFragment StoreEntitySet="Keywords">
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IDVoce_Code" ColumnName="IDVoce_Code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PagamentiIphase">
+            <EntityTypeMapping TypeName="iphaserModel.PagamentiIphase">
+              <MappingFragment StoreEntitySet="PagamentiIphase">
+                <ScalarProperty Name="IDPagamento" ColumnName="IDPagamento" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Chebanca" ColumnName="Chebanca" />
+                <ScalarProperty Name="UbiBanca" ColumnName="UbiBanca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimenti">
+            <EntityTypeMapping TypeName="iphaserModel.Movimenti">
+              <MappingFragment StoreEntitySet="Movimenti">
+                <ScalarProperty Name="IDCategoriaIphase" ColumnName="IDCategoriaIphase" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Causale" ColumnName="Causale" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Divisa" ColumnName="Divisa" />
+                <ScalarProperty Name="Importo" ColumnName="Importo" />
+                <ScalarProperty Name="DataValuta" ColumnName="DataValuta" />
+                <ScalarProperty Name="DataContabile" ColumnName="DataContabile" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Nessuno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
