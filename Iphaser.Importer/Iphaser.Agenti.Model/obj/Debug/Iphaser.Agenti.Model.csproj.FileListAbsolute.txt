@@ -21,7 +21,6 @@ C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\bin\Debug\EntityFramework.SqlServer.xml
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\bin\Debug\it\EntityFramework.resources.dll
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\bin\Debug\it\EntityFramework.SqlServer.resources.dll
-C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\obj\Debug\Iphaser.Agenti.Model.csprojAssemblyReference.cache
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\obj\Debug\Iphaser.Agenti.Model.csproj.CoreCompileInputs.cache
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\obj\Debug\Iphaser.Agenti.Model.csproj.CopyComplete
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Agenti.Model\obj\Debug\Iphaser.Agenti.Model.exe

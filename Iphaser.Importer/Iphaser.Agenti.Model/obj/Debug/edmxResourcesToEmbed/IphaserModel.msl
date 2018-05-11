@@ -37,9 +37,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Carte">
+      <EntityTypeMapping TypeName="iphaserModel.Carte">
+        <MappingFragment StoreEntitySet="Carte">
+          <ScalarProperty Name="BancomatSiNo" ColumnName="BancomatSiNo" />
+          <ScalarProperty Name="Possessore" ColumnName="Possessore" />
+          <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContiCorrente">
+      <EntityTypeMapping TypeName="iphaserModel.ContiCorrente">
+        <MappingFragment StoreEntitySet="ContiCorrente">
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+          <ScalarProperty Name="IDBanca" ColumnName="IDBanca" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Movimenti">
       <EntityTypeMapping TypeName="iphaserModel.Movimenti">
         <MappingFragment StoreEntitySet="Movimenti">
+          <ScalarProperty Name="IDCarta" ColumnName="IDCarta" />
           <ScalarProperty Name="IDCategoriaIphase" ColumnName="IDCategoriaIphase" />
           <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
           <ScalarProperty Name="Causale" ColumnName="Causale" />
@@ -48,6 +69,7 @@
           <ScalarProperty Name="Importo" ColumnName="Importo" />
           <ScalarProperty Name="DataValuta" ColumnName="DataValuta" />
           <ScalarProperty Name="DataContabile" ColumnName="DataContabile" />
+          <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

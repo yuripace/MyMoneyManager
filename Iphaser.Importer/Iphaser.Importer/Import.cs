@@ -16,68 +16,93 @@ namespace Iphaser.Importer
     public class Import
     {
 
-        //public static void Main(string[] args)
-        //{
-        //    DataSet ds;
-        //    ds = LeggiFile();
-        //    bool start = false;
-        //    IphaserEntities context = new IphaserEntities();
-        //    foreach (DataRowView item in ds.Tables[0].DefaultView)
-        //    {
-        //        int i = 0;
-        //        foreach (DataRow row in item.DataView.Table.Rows)
-        //        {
-        //            i++;
-        //            if (i<=23)
-        //            {
-        //                ;
-        //            }
-        //            else if (start)
-        //            {
-        //                Movimenti mov = new Movimenti();
-        //                //OPERAZ.PAGOBANCOMAT DEL 25 / 04 / 2018 ALLE 18.02 TES.N.04823278 PRESSO 5172973 / 00001(ABI 03069) 
-        //                //FASHION & HOME LECCO CORSO CARLO ALBERTO -CAT.MERC. (5651) N.CRO / RRN 811551753363 - ID CARTA 04823278
-        //                //Tessera: Carta di credito padre (la mia). IDCarta chi ha effettivamente usato.
-        //                if (!row.IsNull(1))
-        //                {
-        //                    mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
-        //                    mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
-        //                    mov.Importo = Decimal.Parse(row[3].ToString().Replace(".",","));
-        //                    mov.Divisa = row[4].ToString();
-        //                    mov.Descrizione = row[5].ToString();
-        //                    mov.Causale = row[6].ToString();
-        //                    context.Movimenti.Add(mov);
-
-        //                }
-        //            }
-        //            else if (row[1].ToString().Trim().ToLower().Equals("data contabile"))
-        //            {
-        //                start = true;
-        //            }
-        //        }
-        //        break;
-        //    }
-
-        //    context.SaveChanges();
-        //}
-
-
-
-        static class Program
+        public static void Main(string[] args)
         {
-            static void Main()
+            DataSet ds;
+            ds = LeggiFile();
+            bool start = false;
+            MyMoneyManagerEntities context = new MyMoneyManagerEntities();
+            foreach (DataRowView item in ds.Tables[0].DefaultView)
             {
-                // The input string again.
-                string input = "/OPERAZ.PAGOBANCOMAT DEL 25 / 04 / 2018 ALLE 18.02 TES.N.04823278 PRESSO 5172973 / 00001(ABI 03069) FASHION & HOME LECCO CORSO CARLO ALBERTO -CAT.MERC. (5651) N.CRO / RRN 811551753363 - ID CARTA 04823278";
-                Regex _regex = new Regex(@"CAT.MERC.\s*(\d$");
-                // This calls the static method specified.
-                Match match = _regex.Match(input);
-                if (match.Success)
+                int i = 0;
+                foreach (DataRow row in item.DataView.Table.Rows)
                 {
-                    Console.WriteLine(match.Groups[1].Value);
+                    i++;
+                    if (i <= 23)
+                    {
+                        ;
+                    }
+                    else if (start)
+                    {
+                        Movimenti mov = new Movimenti();
+                        //OPERAZ.PAGOBANCOMAT DEL 25 / 04 / 2018 ALLE 18.02 TES.N.04823278 PRESSO 5172973 / 00001(ABI 03069) 
+                        //FASHION & HOME LECCO CORSO CARLO ALBERTO -CAT.MERC. (5651) N.CRO / RRN 811551753363 - ID CARTA 04823278
+                        //Tessera: Carta di credito padre (la mia). IDCarta chi ha effettivamente usato.
+                        if (!row.IsNull(1))
+                        {
+                            mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
+                            mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
+                            mov.IDContoCorrente = 4923;
+                            mov.Importo = Decimal.Parse(row[3].ToString().Replace(".", ","));
+                            mov.Divisa = row[4].ToString();
+                            mov.Descrizione = row[5].ToString();
+                            mov.Causale = row[6].ToString();
+                            Regex _regex = new Regex(@"CAT.\s*MERC.\s*\(\d+");
+                            // This calls the static method specified.
+                            Match match = _regex.Match(mov.Descrizione);
+                            if (match.Success)
+                            {
+                                //Console.WriteLine("Value:" + match.Groups[0].Value.ToString().Replace("CAT.MERC. (", ""));
+                                string id = Regex.Replace(match.Groups[0].Value.ToString(), "CAT.\\s*MERC.\\s*\\(", "");
+                                int iid = int.Parse(id);
+                                if (iid>0)
+                                {
+                                    mov.IDCategoria = iid;
+                                    if (context.CategorieUbiBanca.Where(q => q.ID == mov.IDCategoria).Count() <= 0 && context.CategorieUbiBanca.Local.Where(q => q.ID == mov.IDCategoria).Count() <= 0)
+                                    {
+                                        CategorieUbiBanca ubicat = new CategorieUbiBanca();
+                                        ubicat.ID = mov.IDCategoria.Value;
+                                        context.CategorieUbiBanca.Add(ubicat);
+                                    }
+                                }
+                                
+                            }
+                            context.Movimenti.Add(mov);
+
+                        }
+                    }
+                    else if (row[1].ToString().Trim().ToLower().Equals("data contabile"))
+                    {
+                        start = true;
+                    }
                 }
+                break;
             }
+
+            context.SaveChanges();
         }
+
+
+
+        //static class Program
+        //{
+        //    static void Main()
+        //    {
+        //        // The input string again.
+        //        string input = "/OPERAZ.PAGOBANCOMAT DEL 25 / 04 / 2018 ALLE 18.02 TES.N.04823278 PRESSO 5172973 / 00001(ABI 03069) FASHION & HOME LECCO CORSO CARLO ALBERTO -CAT.MERC. (5651) N.CRO / RRN 811551753363 - ID CARTA 04823278";
+        //        Regex _regex = new Regex(@"CAT.MERC.\s*\(\d+");
+        //        // This calls the static method specified.
+        //        Match match = _regex.Match(input);
+        //        if (match.Success)
+        //        {
+        //            Console.WriteLine("Value:" + match.Groups[0].Value.ToString().Replace("CAT.MERC. (",""));
+        //        }
+
+        //        //string pattern = "CAT.MERC.\\s*\\(\\d+";
+
+        //        //Console.WriteLine(Regex.Replace(input, pattern, String.Empty));
+        //    }
+        //}
 
         public static DataSet LeggiFile()
         {

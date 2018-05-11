@@ -12,16 +12,18 @@ namespace Iphaser.Agenti.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CategorieUbiBanca
+    public partial class Carte
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CategorieUbiBanca()
+        public Carte()
         {
             this.Movimenti = new HashSet<Movimenti>();
         }
     
-        public int ID { get; set; }
-        public string Descrizione { get; set; }
+        public string ID { get; set; }
+        public string IDContoCorrente { get; set; }
+        public string Possessore { get; set; }
+        public Nullable<int> BancomatSiNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimenti> Movimenti { get; set; }

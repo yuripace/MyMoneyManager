@@ -34,10 +34,6 @@ C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importe
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\Iphaser.Agenti.Model.exe.config
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\EntityFramework.xml
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\EntityFramework.SqlServer.xml
-C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\ExcelDataReader.pdb
-C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\ExcelDataReader.xml
-C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\ExcelDataReader.DataSet.pdb
-C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\ExcelDataReader.DataSet.xml
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\it\EntityFramework.resources.dll
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\bin\Debug\it\EntityFramework.SqlServer.resources.dll
 C:\Cama\Progetti\Personal\MyMoneyManager\Agenti\Iphaser.Importer\Iphaser.Importer\obj\Debug\Iphaser.Importer.csprojAssemblyReference.cache

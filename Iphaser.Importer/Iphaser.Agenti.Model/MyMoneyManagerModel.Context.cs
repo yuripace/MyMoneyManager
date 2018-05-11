@@ -13,10 +13,10 @@ namespace Iphaser.Agenti.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IphaserEntities : DbContext
+    public partial class MyMoneyManagerEntities : DbContext
     {
-        public IphaserEntities()
-            : base("name=IphaserEntities")
+        public MyMoneyManagerEntities()
+            : base("name=MyMoneyManagerEntities")
         {
         }
     
@@ -25,10 +25,12 @@ namespace Iphaser.Agenti.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Carte> Carte { get; set; }
         public virtual DbSet<CategorieIphase> CategorieIphase { get; set; }
         public virtual DbSet<CategorieUbiBanca> CategorieUbiBanca { get; set; }
+        public virtual DbSet<ContiCorrente> ContiCorrente { get; set; }
         public virtual DbSet<Keywords> Keywords { get; set; }
-        public virtual DbSet<PagamentiIphase> PagamentiIphase { get; set; }
         public virtual DbSet<Movimenti> Movimenti { get; set; }
+        public virtual DbSet<PagamentiIphase> PagamentiIphase { get; set; }
     }
 }

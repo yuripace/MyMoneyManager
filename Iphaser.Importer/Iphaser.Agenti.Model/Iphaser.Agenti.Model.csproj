@@ -51,64 +51,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carte.cs">
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CategorieIphase.cs">
-      <DependentUpon>IphaserModel.tt</DependentUpon>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CategorieUbiBanca.cs">
-      <DependentUpon>IphaserModel.tt</DependentUpon>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IphaserModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IphaserModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IphaserModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IphaserModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IphaserModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IphaserModel.edmx</DependentUpon>
+    <Compile Include="ContiCorrente.cs">
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Keywords.cs">
-      <DependentUpon>IphaserModel.tt</DependentUpon>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Movimenti.cs">
-      <DependentUpon>IphaserModel.tt</DependentUpon>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyMoneyManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyMoneyManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyMoneyManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyMoneyManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyMoneyManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="PagamentiIphase.cs">
-      <DependentUpon>IphaserModel.tt</DependentUpon>
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="IphaserModel.edmx">
+    <EntityDeploy Include="MyMoneyManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IphaserModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MyMoneyManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="IphaserModel.edmx.diagram">
-      <DependentUpon>IphaserModel.edmx</DependentUpon>
+    <None Include="MyMoneyManagerModel.edmx.diagram">
+      <DependentUpon>MyMoneyManagerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IphaserModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IphaserModel.Context.cs</LastGenOutput>
-      <DependentUpon>IphaserModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="IphaserModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IphaserModel.edmx</DependentUpon>
-      <LastGenOutput>IphaserModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="MyMoneyManagerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyMoneyManagerModel.edmx</DependentUpon>
+      <LastGenOutput>MyMoneyManagerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MyMoneyManagerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyMoneyManagerModel.edmx</DependentUpon>
+      <LastGenOutput>MyMoneyManagerModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

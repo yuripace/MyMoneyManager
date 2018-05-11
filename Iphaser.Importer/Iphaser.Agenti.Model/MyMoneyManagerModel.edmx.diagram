@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="18a129b238b64ab09ff44c08ca75dbd0" Name="Diagram1">
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Carte" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.CategorieIphase" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.CategorieUbiBanca" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.ContiCorrente" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Keywords" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Movimenti" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.PagamentiIphase" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_Carte" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieUbiBanca" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_ContiCorrente" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

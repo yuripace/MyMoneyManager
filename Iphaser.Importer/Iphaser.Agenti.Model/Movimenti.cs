@@ -15,6 +15,7 @@ namespace Iphaser.Agenti.Model
     public partial class Movimenti
     {
         public int ID { get; set; }
+        public Nullable<int> IDContoCorrente { get; set; }
         public Nullable<System.DateTime> DataContabile { get; set; }
         public Nullable<System.DateTime> DataValuta { get; set; }
         public Nullable<decimal> Importo { get; set; }
@@ -23,7 +24,10 @@ namespace Iphaser.Agenti.Model
         public string Causale { get; set; }
         public Nullable<int> IDCategoria { get; set; }
         public Nullable<int> IDCategoriaIphase { get; set; }
+        public string IDCarta { get; set; }
     
+        public virtual Carte Carte { get; set; }
         public virtual CategorieUbiBanca CategorieUbiBanca { get; set; }
+        public virtual ContiCorrente ContiCorrente { get; set; }
     }
 }
