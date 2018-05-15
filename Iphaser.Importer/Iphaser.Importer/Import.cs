@@ -42,7 +42,7 @@ namespace Iphaser.Importer
                         {
                             mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
                             mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
-                            mov.IDContoCorrente = 4923;
+                            mov.IDContoCorrente = 1047;
                             mov.Importo = Decimal.Parse(row[3].ToString().Replace(".", ","));
                             mov.Divisa = row[4].ToString();
                             mov.Descrizione = row[5].ToString();
@@ -55,7 +55,7 @@ namespace Iphaser.Importer
                                 //Console.WriteLine("Value:" + match.Groups[0].Value.ToString().Replace("CAT.MERC. (", ""));
                                 string id = Regex.Replace(match.Groups[0].Value.ToString(), "CAT.\\s*MERC.\\s*\\(", "");
                                 int iid = int.Parse(id);
-                                if (iid>0)
+                                if (iid > 0)
                                 {
                                     mov.IDCategoria = iid;
                                     if (context.CategorieUbiBanca.Where(q => q.ID == mov.IDCategoria).Count() <= 0 && context.CategorieUbiBanca.Local.Where(q => q.ID == mov.IDCategoria).Count() <= 0)
@@ -65,7 +65,15 @@ namespace Iphaser.Importer
                                         context.CategorieUbiBanca.Add(ubicat);
                                     }
                                 }
-                                
+
+                            }
+                            else
+                            {
+                                if (context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).Count() == 1)
+                                {
+                                    mov.IDCategoriaIphase = int.Parse(context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code);
+                                }
+
                             }
                             context.Movimenti.Add(mov);
 
