@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyMoneyManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDContoCorrente" Type="varchar" MaxLength="50" />
+          <Property Name="Possessore" Type="varchar" MaxLength="50" />
+          <Property Name="BancomatSiNo" Type="int" />
+        </EntityType>
+        <EntityType Name="CategorieIphase">
+          <Key>
+            <PropertyRef Name="IDVoce" />
+          </Key>
+          <Property Name="IDVoce" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="Tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="CategorieUbiBanca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ContiCorrente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IDBanca" Type="int" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="50" />
+          <Property Name="IBAN" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Type" Type="varchar" MaxLength="255" />
+          <Property Name="Used" Type="int" />
+        </EntityType>
+        <EntityType Name="Keywords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Keyword" Type="varchar" MaxLength="50" />
+          <Property Name="IDVoce_Code" Type="nchar" MaxLength="10" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errori trovati durante la generazione:
+avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'MyMoneyManager.dbo.Log4Net'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
+        <EntityType Name="Log4Net">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Level" Type="varchar" MaxLength="20" />
+          <Property Name="User" Type="varchar" MaxLength="50" />
+          <Property Name="Logger" Type="varchar" MaxLength="4000" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" />
+          <Property Name="Params" Type="varchar(max)" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Movimenti">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDContoCorrente" Type="int" />
+          <Property Name="DataContabile" Type="date" />
+          <Property Name="DataValuta" Type="date" />
+          <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Divisa" Type="varchar" MaxLength="5" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="500" />
+          <Property Name="Causale" Type="varchar" MaxLength="255" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="IDCategoriaIphase" Type="int" />
+          <Property Name="IDCarta" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PagamentiIphase">
+          <Key>
+            <PropertyRef Name="IDPagamento" />
+          </Key>
+          <Property Name="IDPagamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="Chebanca" Type="varchar" MaxLength="255" />
+          <Property Name="UbiBanca" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RoleFunction">
+          <Key>
+            <PropertyRef Name="IDRoleFunction" />
+          </Key>
+          <Property Name="IDRoleFunction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDRole_Code" Type="int" />
+          <Property Name="IDFunction_Code" Type="int" />
+          <Property Name="Permission" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tReportCategorieMeseIpase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="Anno" Type="int" />
+          <Property Name="Mese" Type="int" />
+          <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tReportCategorieMeseUbi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="Anno" Type="int" />
+          <Property Name="Mese" Type="int" />
+          <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="IDRole_Code" Type="int" />
+          <Property Name="Password" Type="nchar" MaxLength="25" />
+          <Property Name="Nome" Type="nchar" MaxLength="80" />
+          <Property Name="Cognome" Type="nchar" MaxLength="80" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Logged" Type="smallint" />
+          <Property Name="Logged_IP" Type="nchar" MaxLength="20" />
+          <Property Name="CanUpdate" Type="int" />
+          <Property Name="LastVersion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Movimenti_Carte">
+          <End Role="Carte" Type="Self.Carte" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCarta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_ContiCorrente">
+          <End Role="ContiCorrente" Type="Self.ContiCorrente" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContiCorrente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDContoCorrente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tReportCategorieMeseIpase_CategorieIphase">
+          <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
+          <End Role="tReportCategorieMeseIpase" Type="Self.tReportCategorieMeseIpase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="tReportCategorieMeseIpase">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tReportCategorieMeseUbi_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <End Role="tReportCategorieMeseUbi" Type="Self.tReportCategorieMeseUbi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tReportCategorieMeseUbi">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyMoneyManagerModelStoreContainer">
+          <EntitySet Name="Carte" EntityType="Self.Carte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategorieIphase" EntityType="Self.CategorieIphase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategorieUbiBanca" EntityType="Self.CategorieUbiBanca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContiCorrente" EntityType="Self.ContiCorrente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Function" EntityType="Self.Function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Keywords" EntityType="Self.Keywords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimenti" EntityType="Self.Movimenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleFunction" EntityType="Self.RoleFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tReportCategorieMeseIpase" EntityType="Self.tReportCategorieMeseIpase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tReportCategorieMeseUbi" EntityType="Self.tReportCategorieMeseUbi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log4Net" EntityType="Self.Log4Net" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log4Net].[ID] AS [ID], 
+    [Log4Net].[Date] AS [Date], 
+    [Log4Net].[Level] AS [Level], 
+    [Log4Net].[User] AS [User], 
+    [Log4Net].[Logger] AS [Logger], 
+    [Log4Net].[Message] AS [Message], 
+    [Log4Net].[Params] AS [Params], 
+    [Log4Net].[Exception] AS [Exception]
+    FROM [dbo].[Log4Net] AS [Log4Net]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Movimenti_Carte" Association="Self.FK_Movimenti_Carte">
+            <End Role="Carte" EntitySet="Carte" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="Self.FK_Movimenti_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_ContiCorrente" Association="Self.FK_Movimenti_ContiCorrente">
+            <End Role="ContiCorrente" EntitySet="ContiCorrente" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tReportCategorieMeseIpase_CategorieIphase" Association="Self.FK_tReportCategorieMeseIpase_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="tReportCategorieMeseIpase" EntitySet="tReportCategorieMeseIpase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tReportCategorieMeseUbi_CategorieUbiBanca" Association="Self.FK_tReportCategorieMeseUbi_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="tReportCategorieMeseUbi" EntitySet="tReportCategorieMeseUbi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyMoneyManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDContoCorrente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Possessore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BancomatSiNo" Type="Int32" />
+          <NavigationProperty Name="Movimenti" Relationship="Self.FK_Movimenti_Carte" FromRole="Carte" ToRole="Movimenti" />
+        </EntityType>
+        <EntityType Name="CategorieIphase">
+          <Key>
+            <PropertyRef Name="IDVoce" />
+          </Key>
+          <Property Name="IDVoce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="Int32" />
+          <NavigationProperty Name="tReportCategorieMeseIpase" Relationship="Self.FK_tReportCategorieMeseIpase_CategorieIphase" FromRole="CategorieIphase" ToRole="tReportCategorieMeseIpase" />
+        </EntityType>
+        <EntityType Name="CategorieUbiBanca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movimenti" Relationship="Self.FK_Movimenti_CategorieUbiBanca" FromRole="CategorieUbiBanca" ToRole="Movimenti" />
+          <NavigationProperty Name="tReportCategorieMeseUbi" Relationship="Self.FK_tReportCategorieMeseUbi_CategorieUbiBanca" FromRole="CategorieUbiBanca" ToRole="tReportCategorieMeseUbi" />
+        </EntityType>
+        <EntityType Name="ContiCorrente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IDBanca" Type="Int32" />
+          <Property Name="Descrizione" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movimenti" Relationship="Self.FK_Movimenti_ContiCorrente" FromRole="ContiCorrente" ToRole="Movimenti" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Used" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Keywords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDVoce_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Movimenti">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDContoCorrente" Type="Int32" />
+          <Property Name="DataContabile" Type="DateTime" Precision="0" />
+          <Property Name="DataValuta" Type="DateTime" Precision="0" />
+          <Property Name="Importo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Divisa" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Descrizione" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Causale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="IDCategoriaIphase" Type="Int32" />
+          <Property Name="IDCarta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Carte" Relationship="Self.FK_Movimenti_Carte" FromRole="Movimenti" ToRole="Carte" />
+          <NavigationProperty Name="CategorieUbiBanca" Relationship="Self.FK_Movimenti_CategorieUbiBanca" FromRole="Movimenti" ToRole="CategorieUbiBanca" />
+          <NavigationProperty Name="ContiCorrente" Relationship="Self.FK_Movimenti_ContiCorrente" FromRole="Movimenti" ToRole="ContiCorrente" />
+        </EntityType>
+        <EntityType Name="PagamentiIphase">
+          <Key>
+            <PropertyRef Name="IDPagamento" />
+          </Key>
+          <Property Name="IDPagamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Chebanca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UbiBanca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RoleFunction">
+          <Key>
+            <PropertyRef Name="IDRoleFunction" />
+          </Key>
+          <Property Name="IDRoleFunction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDRole_Code" Type="Int32" />
+          <Property Name="IDFunction_Code" Type="Int32" />
+          <Property Name="Permission" Type="Int16" />
+        </EntityType>
+        <EntityType Name="tReportCategorieMeseIpase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="Anno" Type="Int32" />
+          <Property Name="Mese" Type="Int32" />
+          <Property Name="Importo" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="CategorieIphase" Relationship="Self.FK_tReportCategorieMeseIpase_CategorieIphase" FromRole="tReportCategorieMeseIpase" ToRole="CategorieIphase" />
+        </EntityType>
+        <EntityType Name="tReportCategorieMeseUbi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="Anno" Type="Int32" />
+          <Property Name="Mese" Type="Int32" />
+          <Property Name="Importo" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="CategorieUbiBanca" Relationship="Self.FK_tReportCategorieMeseUbi_CategorieUbiBanca" FromRole="tReportCategorieMeseUbi" ToRole="CategorieUbiBanca" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IDRole_Code" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Cognome" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logged" Type="Int16" />
+          <Property Name="Logged_IP" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CanUpdate" Type="Int32" />
+          <Property Name="LastVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log4Net">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Level" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logger" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Params" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Movimenti_Carte">
+          <End Role="Carte" Type="Self.Carte" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCarta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tReportCategorieMeseIpase_CategorieIphase">
+          <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
+          <End Role="tReportCategorieMeseIpase" Type="Self.tReportCategorieMeseIpase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="tReportCategorieMeseIpase">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tReportCategorieMeseUbi_CategorieUbiBanca">
+          <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
+          <End Role="tReportCategorieMeseUbi" Type="Self.tReportCategorieMeseUbi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieUbiBanca">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tReportCategorieMeseUbi">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_ContiCorrente">
+          <End Role="ContiCorrente" Type="Self.ContiCorrente" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContiCorrente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDContoCorrente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyMoneyManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carte" EntityType="Self.Carte" />
+          <EntitySet Name="CategorieIphase" EntityType="Self.CategorieIphase" />
+          <EntitySet Name="CategorieUbiBanca" EntityType="Self.CategorieUbiBanca" />
+          <EntitySet Name="ContiCorrente" EntityType="Self.ContiCorrente" />
+          <EntitySet Name="Function" EntityType="Self.Function" />
+          <EntitySet Name="Keywords" EntityType="Self.Keywords" />
+          <EntitySet Name="Movimenti" EntityType="Self.Movimenti" />
+          <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="RoleFunction" EntityType="Self.RoleFunction" />
+          <EntitySet Name="tReportCategorieMeseIpase" EntityType="Self.tReportCategorieMeseIpase" />
+          <EntitySet Name="tReportCategorieMeseUbi" EntityType="Self.tReportCategorieMeseUbi" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Log4Net" EntityType="Self.Log4Net" />
+          <AssociationSet Name="FK_Movimenti_Carte" Association="Self.FK_Movimenti_Carte">
+            <End Role="Carte" EntitySet="Carte" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tReportCategorieMeseIpase_CategorieIphase" Association="Self.FK_tReportCategorieMeseIpase_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="tReportCategorieMeseIpase" EntitySet="tReportCategorieMeseIpase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="Self.FK_Movimenti_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tReportCategorieMeseUbi_CategorieUbiBanca" Association="Self.FK_tReportCategorieMeseUbi_CategorieUbiBanca">
+            <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
+            <End Role="tReportCategorieMeseUbi" EntitySet="tReportCategorieMeseUbi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_ContiCorrente" Association="Self.FK_Movimenti_ContiCorrente">
+            <End Role="ContiCorrente" EntitySet="ContiCorrente" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyMoneyManagerModelStoreContainer" CdmEntityContainer="MyMoneyManagerEntities">
+          <EntitySetMapping Name="Carte">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Carte">
+              <MappingFragment StoreEntitySet="Carte">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
+                <ScalarProperty Name="Possessore" ColumnName="Possessore" />
+                <ScalarProperty Name="BancomatSiNo" ColumnName="BancomatSiNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorieIphase">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.CategorieIphase">
+              <MappingFragment StoreEntitySet="CategorieIphase">
+                <ScalarProperty Name="IDVoce" ColumnName="IDVoce" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorieUbiBanca">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.CategorieUbiBanca">
+              <MappingFragment StoreEntitySet="CategorieUbiBanca">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContiCorrente">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.ContiCorrente">
+              <MappingFragment StoreEntitySet="ContiCorrente">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDBanca" ColumnName="IDBanca" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Function">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Function">
+              <MappingFragment StoreEntitySet="Function">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Used" ColumnName="Used" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keywords">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Keywords">
+              <MappingFragment StoreEntitySet="Keywords">
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IDVoce_Code" ColumnName="IDVoce_Code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimenti">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Movimenti">
+              <MappingFragment StoreEntitySet="Movimenti">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
+                <ScalarProperty Name="DataContabile" ColumnName="DataContabile" />
+                <ScalarProperty Name="DataValuta" ColumnName="DataValuta" />
+                <ScalarProperty Name="Importo" ColumnName="Importo" />
+                <ScalarProperty Name="Divisa" ColumnName="Divisa" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Causale" ColumnName="Causale" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDCategoriaIphase" ColumnName="IDCategoriaIphase" />
+                <ScalarProperty Name="IDCarta" ColumnName="IDCarta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PagamentiIphase">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.PagamentiIphase">
+              <MappingFragment StoreEntitySet="PagamentiIphase">
+                <ScalarProperty Name="IDPagamento" ColumnName="IDPagamento" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Chebanca" ColumnName="Chebanca" />
+                <ScalarProperty Name="UbiBanca" ColumnName="UbiBanca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleFunction">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.RoleFunction">
+              <MappingFragment StoreEntitySet="RoleFunction">
+                <ScalarProperty Name="IDRoleFunction" ColumnName="IDRoleFunction" />
+                <ScalarProperty Name="IDRole_Code" ColumnName="IDRole_Code" />
+                <ScalarProperty Name="IDFunction_Code" ColumnName="IDFunction_Code" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tReportCategorieMeseIpase">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.tReportCategorieMeseIpase">
+              <MappingFragment StoreEntitySet="tReportCategorieMeseIpase">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Anno" ColumnName="Anno" />
+                <ScalarProperty Name="Mese" ColumnName="Mese" />
+                <ScalarProperty Name="Importo" ColumnName="Importo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tReportCategorieMeseUbi">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.tReportCategorieMeseUbi">
+              <MappingFragment StoreEntitySet="tReportCategorieMeseUbi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Anno" ColumnName="Anno" />
+                <ScalarProperty Name="Mese" ColumnName="Mese" />
+                <ScalarProperty Name="Importo" ColumnName="Importo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IDRole_Code" ColumnName="IDRole_Code" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Logged" ColumnName="Logged" />
+                <ScalarProperty Name="Logged_IP" ColumnName="Logged_IP" />
+                <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+                <ScalarProperty Name="LastVersion" ColumnName="LastVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log4Net">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Log4Net">
+              <MappingFragment StoreEntitySet="Log4Net">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Params" ColumnName="Params" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Nessuno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="561922d159774af7bc059ab146a80cda" Name="Diagram1">
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Carte" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.CategorieIphase" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.CategorieUbiBanca" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.ContiCorrente" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Function" Width="1.5" PointX="5.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Keywords" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Movimenti" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.PagamentiIphase" Width="1.5" PointX="5.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Role" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.RoleFunction" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.tReportCategorieMeseIpase" Width="1.5" PointX="8" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.tReportCategorieMeseUbi" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Users" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Log4Net" Width="1.5" PointX="10.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_Carte" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseIpase_CategorieIphase" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieUbiBanca" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseUbi_CategorieUbiBanca" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_ContiCorrente" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
