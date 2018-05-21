@@ -18,6 +18,7 @@ namespace Iphaser.Agenti.Model
         public CategorieUbiBanca()
         {
             this.Movimenti = new HashSet<Movimenti>();
+            this.tReportCategorieMeseUbi = new HashSet<tReportCategorieMeseUbi>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace Iphaser.Agenti.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimenti> Movimenti { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tReportCategorieMeseUbi> tReportCategorieMeseUbi { get; set; }
     }
 }

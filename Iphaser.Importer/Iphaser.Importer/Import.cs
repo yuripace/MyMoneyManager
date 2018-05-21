@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace Iphaser.Importer
             ds = LeggiFile();
             bool start = false;
             MyMoneyManagerEntities context = new MyMoneyManagerEntities();
+
+            #region Import Movimenti
             foreach (DataRowView item in ds.Tables[0].DefaultView)
             {
                 int i = 0;
@@ -67,14 +70,13 @@ namespace Iphaser.Importer
                                 }
 
                             }
-                            else
-                            {
-                                if (context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).Count() == 1)
-                                {
-                                    mov.IDCategoriaIphase = int.Parse(context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code);
-                                }
 
+                            if (context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).Count() == 1)
+                            {
+                                mov.IDCategoriaIphase = int.Parse(context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code);
                             }
+
+
                             context.Movimenti.Add(mov);
 
                         }
@@ -86,31 +88,10 @@ namespace Iphaser.Importer
                 }
                 break;
             }
-
+            #endregion
             context.SaveChanges();
+
         }
-
-
-
-        //static class Program
-        //{
-        //    static void Main()
-        //    {
-        //        // The input string again.
-        //        string input = "/OPERAZ.PAGOBANCOMAT DEL 25 / 04 / 2018 ALLE 18.02 TES.N.04823278 PRESSO 5172973 / 00001(ABI 03069) FASHION & HOME LECCO CORSO CARLO ALBERTO -CAT.MERC. (5651) N.CRO / RRN 811551753363 - ID CARTA 04823278";
-        //        Regex _regex = new Regex(@"CAT.MERC.\s*\(\d+");
-        //        // This calls the static method specified.
-        //        Match match = _regex.Match(input);
-        //        if (match.Success)
-        //        {
-        //            Console.WriteLine("Value:" + match.Groups[0].Value.ToString().Replace("CAT.MERC. (",""));
-        //        }
-
-        //        //string pattern = "CAT.MERC.\\s*\\(\\d+";
-
-        //        //Console.WriteLine(Regex.Replace(input, pattern, String.Empty));
-        //    }
-        //}
 
         public static DataSet LeggiFile()
         {

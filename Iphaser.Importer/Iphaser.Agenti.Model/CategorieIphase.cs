@@ -14,8 +14,17 @@ namespace Iphaser.Agenti.Model
     
     public partial class CategorieIphase
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CategorieIphase()
+        {
+            this.tReportCategorieMeseIpase = new HashSet<tReportCategorieMeseIpase>();
+        }
+    
         public int IDVoce { get; set; }
         public string Descrizione { get; set; }
         public Nullable<int> Tipo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tReportCategorieMeseIpase> tReportCategorieMeseIpase { get; set; }
     }
 }

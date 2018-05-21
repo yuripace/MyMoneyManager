@@ -15,6 +15,10 @@
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_Carte" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieUbiBanca" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_ContiCorrente" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.tReportCategorieMeseIpase" Width="1.5" PointX="8" PointY="4.625" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.tReportCategorieMeseUbi" Width="1.5" PointX="3" PointY="9" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseIpase_CategorieIphase" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseUbi_CategorieUbiBanca" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
