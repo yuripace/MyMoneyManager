@@ -56,6 +56,14 @@
       <Project>{f6bc3b3b-c6e1-48f0-991a-8b84123c7a79}</Project>
       <Name>Iphaser.Agenti.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyMoneyManager.Models\MyMoneyManager.Models.csproj">
+      <Project>{0cc465f1-f074-4834-abfe-f1af5c873905}</Project>
+      <Name>MyMoneyManager.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyMoneyManager.ViewModel\MyMoneyManager.ViewModels.csproj">
+      <Project>{b60b31e0-ded2-40bb-babe-0de0270674af}</Project>
+      <Name>MyMoneyManager.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
