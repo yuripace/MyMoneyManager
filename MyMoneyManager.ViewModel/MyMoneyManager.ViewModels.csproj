@@ -55,5 +55,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyMoneyManager.Models\MyMoneyManager.Models.csproj">
+      <Project>{0cc465f1-f074-4834-abfe-f1af5c873905}</Project>
+      <Name>MyMoneyManager.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

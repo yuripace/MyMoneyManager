@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Cama 1 s.p.a | Elenco Accessi</title>
+<title>Elenco Movimenti</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -1473,7 +1473,35 @@ $(document).ready(function(){
 			$('.dataTables-example').DataTable({
 				pageLength: 10,
 				responsive: true,
-				ajax: "..\/..\/server_side\/list.php",
+				$.ajax({
+					type: "GET",
+					url: "/api/Movimenti/Get",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (data) {
+						//alert(JSON.stringify(data));                  
+						$("#DIV").html('');
+						var DIV = '';
+						$.each(data, function (i, item) {
+							var rows = "<tr>" +
+								"<td id='dtValuta'>" + item.regNo + "</td>" +
+								"<td id='Importo'>" + item.name + "</td>" +
+								"<td id='Descrizione'>" + item.address + "</td>" +
+								"<td id='PhoneNo'>" + item.phoneNo + "</td>" +
+								"</tr>";
+							$('#Table').append(rows);
+						}); //End of foreach Loop   
+						console.log(data);
+					}, //End of AJAX Success function  
+
+					failure: function (data) {
+						alert(data.responseText);
+					}, //End of AJAX failure function  
+					error: function (data) {
+						alert(data.responseText);
+					} //End of AJAX error function  
+
+				});
 				sAjaxDataProp: "data",
 				dom:
 					"<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +

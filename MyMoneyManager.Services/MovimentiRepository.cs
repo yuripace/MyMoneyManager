@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Iphaser.Agenti.Model;
+using MyMoneyManager.Models;
 namespace Iphaser.Services
 {
     public class MovimentiRepository
     {
-        private IphaserEntities context;
-        public MovimentiRepository(IphaserEntities _context)
+        private MyMoneyManagerEntities context;
+        public MovimentiRepository(MyMoneyManagerEntities _context)
         {
             _context = context;
         }
