@@ -1,0 +1,104 @@
+﻿@model MyMoneyManager.Models.Movimenti
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Movimenti</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DataContabile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataContabile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataValuta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataValuta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Divisa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Divisa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Causale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Causale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Carte.IDContoCorrente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Carte.IDContoCorrente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategorieUbiBanca.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategorieUbiBanca.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContiCorrente.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContiCorrente.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategorieIphase.Descrizione)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

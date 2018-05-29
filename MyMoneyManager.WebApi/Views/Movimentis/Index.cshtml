@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MyMoneyManager.Models.Movimenti>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DataContabile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataValuta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Importo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Divisa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Causale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDCategoriaIphase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carte.IDContoCorrente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategorieUbiBanca.Descrizione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContiCorrente.Descrizione)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataContabile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataValuta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Importo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Divisa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descrizione)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Causale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDCategoriaIphase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carte.IDContoCorrente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategorieUbiBanca.Descrizione)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContiCorrente.Descrizione)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

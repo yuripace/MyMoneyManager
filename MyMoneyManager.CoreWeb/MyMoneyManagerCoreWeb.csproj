@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net452</TargetFramework>
     <StartupObject>Iphase.CoreWeb.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -4385,6 +4386,13 @@
     <None Include="wwwroot\css\plugins\toastr\toastr.min.css" />
     <None Include="wwwroot\css\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\html\accessi\elenco.html" />
+    <None Include="wwwroot\html\accessi\elenco_accessi2.html" />
+    <None Include="wwwroot\html\accessi\nuovo.html" />
+    <None Include="wwwroot\html\accessi\nuovo_accesso2.html" />
+    <None Include="wwwroot\html\accessi\storico_accessi.html" />
+    <None Include="wwwroot\html\accessi\storico_accessi2.html" />
+    <None Include="wwwroot\html\movimenti\elenco_movimenti.html" />
     <None Include="wwwroot\img\a1.jpg" />
     <None Include="wwwroot\img\a2.jpg" />
     <None Include="wwwroot\img\a3.jpg" />
@@ -5608,6 +5616,10 @@
     <None Include="wwwroot\js\plugins\validate\jquery.validate.min.js" />
     <None Include="wwwroot\js\plugins\video\responsible-video.js" />
     <None Include="wwwroot\js\plugins\wow\wow.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyMoneyManager.Models\MyMoneyManager.Models.csproj" />
   </ItemGroup>
 
 </Project>

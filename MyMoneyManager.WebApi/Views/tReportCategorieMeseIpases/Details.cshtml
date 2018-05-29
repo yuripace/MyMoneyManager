@@ -1,0 +1,50 @@
+﻿@model MyMoneyManager.Models.tReportCategorieMeseIpase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tReportCategorieMeseIpase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Anno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mese)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mese)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Importo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategorieIphase.Descrizione)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -24,6 +24,7 @@
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieUbiBanca" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseUbi_CategorieUbiBanca" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_ContiCorrente" ManuallyRouted="false" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

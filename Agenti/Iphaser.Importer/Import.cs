@@ -45,7 +45,7 @@ namespace Iphaser.Importer
                         {
                             mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
                             mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
-                            mov.IDContoCorrente = 1047;
+                            mov.IDContoCorrente = 4923;
                             mov.Importo = Decimal.Parse(row[3].ToString().Replace(".", ","));
                             mov.Divisa = row[4].ToString();
                             mov.Descrizione = row[5].ToString();
@@ -96,8 +96,8 @@ namespace Iphaser.Importer
         public static DataSet LeggiFile()
         {
             DataSet ds;
-            var extension = Path.GetExtension("C:\\Saldo_e_Movimenti.xls").ToLower();
-            using (var stream = new FileStream("C:\\Saldo_e_Movimenti.xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            var extension = Path.GetExtension("C:\\4923Saldo_e_Movimenti.xls").ToLower();
+            using (var stream = new FileStream("C:\\4923Saldo_e_Movimenti.xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 IExcelDataReader reader = null;
                 if (extension == ".xls")

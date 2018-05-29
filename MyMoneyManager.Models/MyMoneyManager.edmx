@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyMoneyManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyMoneyManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Carte">
           <Key>
             <PropertyRef Name="ID" />
@@ -161,6 +161,18 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Movimenti_CategorieIphase">
+          <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoriaIphase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Movimenti_CategorieUbiBanca">
           <End Role="CategorieUbiBanca" Type="Self.CategorieUbiBanca" Multiplicity="0..1" />
           <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
@@ -239,6 +251,10 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             <End Role="Carte" EntitySet="Carte" />
             <End Role="Movimenti" EntitySet="Movimenti" />
           </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieIphase" Association="Self.FK_Movimenti_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="Self.FK_Movimenti_CategorieUbiBanca">
             <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
             <End Role="Movimenti" EntitySet="Movimenti" />
@@ -256,8 +272,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             <End Role="tReportCategorieMeseUbi" EntitySet="tReportCategorieMeseUbi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyMoneyManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -279,6 +294,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="Int32" />
           <NavigationProperty Name="tReportCategorieMeseIpase" Relationship="Self.FK_tReportCategorieMeseIpase_CategorieIphase" FromRole="CategorieIphase" ToRole="tReportCategorieMeseIpase" />
+          <NavigationProperty Name="Movimenti" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="CategorieIphase" ToRole="Movimenti" />
         </EntityType>
         <EntityType Name="CategorieUbiBanca">
           <Key>
@@ -336,6 +352,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <NavigationProperty Name="Carte" Relationship="Self.FK_Movimenti_Carte" FromRole="Movimenti" ToRole="Carte" />
           <NavigationProperty Name="CategorieUbiBanca" Relationship="Self.FK_Movimenti_CategorieUbiBanca" FromRole="Movimenti" ToRole="CategorieUbiBanca" />
           <NavigationProperty Name="ContiCorrente" Relationship="Self.FK_Movimenti_ContiCorrente" FromRole="Movimenti" ToRole="ContiCorrente" />
+          <NavigationProperty Name="CategorieIphase" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="Movimenti" ToRole="CategorieIphase" />
         </EntityType>
         <EntityType Name="PagamentiIphase">
           <Key>
@@ -508,7 +525,23 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             <End Role="ContiCorrente" EntitySet="ContiCorrente" />
             <End Role="Movimenti" EntitySet="Movimenti" />
           </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieIphase" Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Movimenti_CategorieIphase">
+          <End Type="MyMoneyManagerModel.CategorieIphase" Role="CategorieIphase" Multiplicity="0..1" />
+          <End Type="MyMoneyManagerModel.Movimenti" Role="Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoriaIphase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
