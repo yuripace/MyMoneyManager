@@ -23,15 +23,37 @@ namespace Iphaser.CalcolaCategorie
 
             #region Calcolo report IPASE
             //var calcolo = context.Movimenti.Where(q => q.IDCategoriaIphase != null).GroupBy(q => q.IDCategoriaIphase).Sum(q => new { q. }q.Sum(e => e.Importo)).;
-            var calcoloipase = context.Movimenti.Where(q => q.IDCategoriaIphase != null).GroupBy(x => new { x.IDCategoriaIphase, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Year, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Month }).SelectMany(rr => rr.Select(r => new { IDCategoria = rr.Key.IDCategoriaIphase, Anno = rr.Key.Year, Mese = rr.Key.Month, Totale = rr.Sum(t => t.Importo) }));
-            foreach (var item in calcoloipase)
+            //var calcoloipase = context.Movimenti.Where(q => q.IDCategoriaIphase != null).GroupBy(x => new { x.IDCategoriaIphase, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Year, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Month }).SelectMany(rr => rr.Select(r => new { IDCategoria = rr.Key.IDCategoriaIphase, Anno = rr.Key.Year, Mese = rr.Key.Month, Totale = rr.Sum(t => t.Importo) }));
+            //foreach (var item in calcoloipase)
+            //{
+            //    tReportCategorieMeseIpase rep = new tReportCategorieMeseIpase();
+            //    rep.IDCategoria = item.IDCategoria;
+            //    rep.Anno = item.Anno;
+            //    rep.Mese = item.Mese;
+            //    rep.Importo = item.Totale;
+            //    context.tReportCategorieMeseIpase.Add(rep);
+            //}
+            var collection = context.vReportCategorieUbi;
+            foreach (var item in collection)
             {
-                tReportCategorieMeseIpase rep = new tReportCategorieMeseIpase();
+                tReportCategorieMeseUbi rep = new tReportCategorieMeseUbi();
                 rep.IDCategoria = item.IDCategoria;
                 rep.Anno = item.Anno;
                 rep.Mese = item.Mese;
                 rep.Importo = item.Totale;
-                context.tReportCategorieMeseIpase.Add(rep);
+                context.tReportCategorieMeseUbi.Add(rep);
+            }
+            context.SaveChanges();
+
+            var collection2 = context.v_ReportCategorieIpase;
+            foreach (var item in collection2)
+            {
+                tReportCategorieMeseIpase rep1 = new tReportCategorieMeseIpase();
+                rep1.IDCategoria = item.IDCategoriaIphase;
+                rep1.Anno = item.Anno;
+                rep1.Mese = item.Mese;
+                rep1.Importo = item.Totale;
+                context.tReportCategorieMeseIpase.Add(rep1);
             }
             context.SaveChanges();
             #endregion

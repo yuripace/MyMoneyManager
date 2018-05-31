@@ -19,6 +19,10 @@
         <EntityTypeShape EntityType="MyMoneyManagerModel.tReportCategorieMeseUbi" Width="1.5" PointX="3" PointY="9" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseIpase_CategorieIphase" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseUbi_CategorieUbiBanca" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.v_ReportCategorieIpase" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.vReportCategorieUbi" Width="1.5" PointX="7.375" PointY="7.75" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

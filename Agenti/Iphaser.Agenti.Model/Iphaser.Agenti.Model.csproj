@@ -95,6 +95,12 @@
     <Compile Include="tReportCategorieMeseUbi.cs">
       <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vReportCategorieUbi.cs">
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_ReportCategorieIpase.cs">
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

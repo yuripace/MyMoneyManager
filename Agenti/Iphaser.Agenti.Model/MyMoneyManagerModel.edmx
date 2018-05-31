@@ -91,6 +91,32 @@
           <Property Name="Mese" Type="int" />
           <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
+        <!--Errori trovati durante la generazione:
+avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'MyMoneyManager.dbo.v_ReportCategorieIpase'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
+        <EntityType Name="v_ReportCategorieIpase">
+          <Key>
+            <PropertyRef Name="RN" />
+          </Key>
+          <Property Name="Anno" Type="int" />
+          <Property Name="Mese" Type="int" />
+          <Property Name="IDCategoriaIphase" Type="int" />
+          <Property Name="Totale" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="RN" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errori trovati durante la generazione:
+avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'MyMoneyManager.dbo.vReportCategorieUbi'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
+        <EntityType Name="vReportCategorieUbi">
+          <Key>
+            <PropertyRef Name="RN" />
+          </Key>
+          <Property Name="Anno" Type="int" />
+          <Property Name="Mese" Type="int" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="Totale" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="255" />
+          <Property Name="RN" Type="bigint" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Movimenti_Carte">
           <End Role="Carte" Type="Self.Carte" Multiplicity="0..1" />
           <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
@@ -100,6 +126,18 @@
             </Principal>
             <Dependent Role="Movimenti">
               <PropertyRef Name="IDCarta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimenti_CategorieIphase">
+          <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoriaIphase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -161,8 +199,32 @@
           <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tReportCategorieMeseIpase" EntityType="Self.tReportCategorieMeseIpase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tReportCategorieMeseUbi" EntityType="Self.tReportCategorieMeseUbi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_ReportCategorieIpase" EntityType="Self.v_ReportCategorieIpase" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ReportCategorieIpase].[Anno] AS [Anno], 
+    [v_ReportCategorieIpase].[Mese] AS [Mese], 
+    [v_ReportCategorieIpase].[IDCategoriaIphase] AS [IDCategoriaIphase], 
+    [v_ReportCategorieIpase].[Totale] AS [Totale], 
+    [v_ReportCategorieIpase].[Descrizione] AS [Descrizione], 
+    [v_ReportCategorieIpase].[RN] AS [RN]
+    FROM [dbo].[v_ReportCategorieIpase] AS [v_ReportCategorieIpase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vReportCategorieUbi" EntityType="Self.vReportCategorieUbi" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vReportCategorieUbi].[Anno] AS [Anno], 
+    [vReportCategorieUbi].[Mese] AS [Mese], 
+    [vReportCategorieUbi].[IDCategoria] AS [IDCategoria], 
+    [vReportCategorieUbi].[Totale] AS [Totale], 
+    [vReportCategorieUbi].[Descrizione] AS [Descrizione], 
+    [vReportCategorieUbi].[RN] AS [RN]
+    FROM [dbo].[vReportCategorieUbi] AS [vReportCategorieUbi]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Movimenti_Carte" Association="Self.FK_Movimenti_Carte">
             <End Role="Carte" EntitySet="Carte" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_CategorieIphase" Association="Self.FK_Movimenti_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
             <End Role="Movimenti" EntitySet="Movimenti" />
           </AssociationSet>
           <AssociationSet Name="FK_Movimenti_CategorieUbiBanca" Association="Self.FK_Movimenti_CategorieUbiBanca">
@@ -204,6 +266,7 @@
           <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="Int32" />
           <NavigationProperty Name="tReportCategorieMeseIpase" Relationship="MyMoneyManagerModel.FK_tReportCategorieMeseIpase_CategorieIphase" FromRole="CategorieIphase" ToRole="tReportCategorieMeseIpase" />
+          <NavigationProperty Name="Movimenti" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="CategorieIphase" ToRole="Movimenti" />
         </EntityType>
         <EntityType Name="CategorieUbiBanca">
           <Key>
@@ -250,6 +313,7 @@
           <NavigationProperty Name="Carte" Relationship="Self.FK_Movimenti_Carte" FromRole="Movimenti" ToRole="Carte" />
           <NavigationProperty Name="CategorieUbiBanca" Relationship="Self.FK_Movimenti_CategorieUbiBanca" FromRole="Movimenti" ToRole="CategorieUbiBanca" />
           <NavigationProperty Name="ContiCorrente" Relationship="Self.FK_Movimenti_ContiCorrente" FromRole="Movimenti" ToRole="ContiCorrente" />
+          <NavigationProperty Name="CategorieIphase" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="Movimenti" ToRole="CategorieIphase" />
         </EntityType>
         <EntityType Name="PagamentiIphase">
           <Key>
@@ -326,6 +390,12 @@
             <End Role="CategorieUbiBanca" EntitySet="CategorieUbiBanca" />
             <End Role="tReportCategorieMeseUbi" EntitySet="tReportCategorieMeseUbi" />
           </AssociationSet>
+          <EntitySet Name="v_ReportCategorieIpase" EntityType="MyMoneyManagerModel.v_ReportCategorieIpase" />
+          <EntitySet Name="vReportCategorieUbi" EntityType="MyMoneyManagerModel.vReportCategorieUbi" />
+          <AssociationSet Name="FK_Movimenti_CategorieIphase" Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tReportCategorieMeseIpase">
           <Key>
@@ -370,6 +440,40 @@
             </Principal>
             <Dependent Role="tReportCategorieMeseUbi">
               <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="v_ReportCategorieIpase">
+          <Key>
+            <PropertyRef Name="RN" />
+          </Key>
+          <Property Name="Anno" Type="Int32" />
+          <Property Name="Mese" Type="Int32" />
+          <Property Name="IDCategoriaIphase" Type="Int32" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RN" Type="Int64" Nullable="false" />
+          <Property Name="Totale" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="vReportCategorieUbi">
+          <Key>
+            <PropertyRef Name="RN" />
+          </Key>
+          <Property Name="Anno" Type="Int32" />
+          <Property Name="Mese" Type="Int32" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="Totale" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RN" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Movimenti_CategorieIphase">
+          <End Type="MyMoneyManagerModel.CategorieIphase" Role="CategorieIphase" Multiplicity="0..1" />
+          <End Type="MyMoneyManagerModel.Movimenti" Role="Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDCategoriaIphase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -471,6 +575,30 @@
                 <ScalarProperty Name="Anno" ColumnName="Anno" />
                 <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ReportCategorieIpase">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.v_ReportCategorieIpase">
+              <MappingFragment StoreEntitySet="v_ReportCategorieIpase">
+                <ScalarProperty Name="Totale" ColumnName="Totale" />
+                <ScalarProperty Name="RN" ColumnName="RN" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="IDCategoriaIphase" ColumnName="IDCategoriaIphase" />
+                <ScalarProperty Name="Mese" ColumnName="Mese" />
+                <ScalarProperty Name="Anno" ColumnName="Anno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vReportCategorieUbi">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.vReportCategorieUbi">
+              <MappingFragment StoreEntitySet="vReportCategorieUbi">
+                <ScalarProperty Name="RN" ColumnName="RN" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="Totale" ColumnName="Totale" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Mese" ColumnName="Mese" />
+                <ScalarProperty Name="Anno" ColumnName="Anno" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,5 +29,6 @@ namespace Iphaser.Agenti.Model
         public virtual Carte Carte { get; set; }
         public virtual CategorieUbiBanca CategorieUbiBanca { get; set; }
         public virtual ContiCorrente ContiCorrente { get; set; }
+        public virtual CategorieIphase CategorieIphase { get; set; }
     }
 }

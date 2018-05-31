@@ -34,5 +34,7 @@ namespace Iphaser.Agenti.Model
         public virtual DbSet<PagamentiIphase> PagamentiIphase { get; set; }
         public virtual DbSet<tReportCategorieMeseIpase> tReportCategorieMeseIpase { get; set; }
         public virtual DbSet<tReportCategorieMeseUbi> tReportCategorieMeseUbi { get; set; }
+        public virtual DbSet<v_ReportCategorieIpase> v_ReportCategorieIpase { get; set; }
+        public virtual DbSet<vReportCategorieUbi> vReportCategorieUbi { get; set; }
     }
 }
