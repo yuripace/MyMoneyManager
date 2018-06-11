@@ -75,6 +75,8 @@ namespace Iphaser.Importer
                             {
                                 mov.IDCategoriaIphase = int.Parse(context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code);
                             }
+                            else
+                                mov.IDCategoriaIphase = -1;
 
 
                             context.Movimenti.Add(mov);
