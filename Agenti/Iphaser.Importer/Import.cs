@@ -98,8 +98,8 @@ namespace Iphaser.Importer
         public static DataSet LeggiFile()
         {
             DataSet ds;
-            var extension = Path.GetExtension("C:\\4923Saldo_e_Movimenti.xls").ToLower();
-            using (var stream = new FileStream("C:\\4923Saldo_e_Movimenti.xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            var extension = Path.GetExtension("C:\\Saldo_e_Movimenti_4923.xls").ToLower();
+            using (var stream = new FileStream("C:\\Saldo_e_Movimenti_4923.xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 IExcelDataReader reader = null;
                 if (extension == ".xls")
