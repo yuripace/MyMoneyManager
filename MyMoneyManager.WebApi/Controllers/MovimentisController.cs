@@ -22,6 +22,13 @@ namespace MyMoneyManager.WebApi.Controllers
             return View(await movimenti.ToListAsync());
         }
 
+        // GET: Movimentis
+        public async Task<ActionResult> DaCompilareIndex()
+        {
+            var movimenti = db.Movimenti.Where(m => m.IDCategoriaIphase == -1).Include(m => m.Carte).Include(m => m.CategorieUbiBanca).Include(m => m.ContiCorrente).Include(m => m.CategorieIphase);
+            return View(await movimenti.ToListAsync());
+        }
+
         // GET: Movimentis/Details/5
         public async Task<ActionResult> Details(int? id)
         {
