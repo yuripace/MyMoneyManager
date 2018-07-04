@@ -5941,6 +5941,7 @@
     <Content Include="static\lib\jquery-validation\_bower.json" />
     <Content Include="static\lib\jquery\dist\jquery.min.map" />
     <Content Include="static\lib\jquery\_bower.json" />
+    <Content Include="Views\Movimentis\DaCompilareIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
