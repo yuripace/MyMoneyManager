@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyMoneyManager.Models;
 
 namespace MyMoneyManager.WebApi.Controllers
 {
@@ -13,6 +14,16 @@ namespace MyMoneyManager.WebApi.Controllers
             ViewBag.Title = "Home Page";
 
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult ElencoMovimenti()
+        {
+            Models.Movimenti model = new Models.Movimenti();
+            //return PartialView("_EmployeeRegistration", model);
+
+            var movimenti = model;
+            return PartialView(movimenti);
         }
     }
 }

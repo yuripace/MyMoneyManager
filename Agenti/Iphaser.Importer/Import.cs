@@ -51,6 +51,7 @@ namespace Iphaser.Importer
                         //Tessera: Carta di credito padre (la mia). IDCarta chi ha effettivamente usato.
                         if (!row.IsNull(1))
                         {
+                           
                             mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
                             mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
                             mov.IDContoCorrente = IDConto;
@@ -79,13 +80,20 @@ namespace Iphaser.Importer
 
                             }
 
-                            if (context.Keywords.Where(q => mov.Descrizione.ToLower().Trim().Contains(q.Keyword.Trim().ToLower())).Count() == 1)
+                            if (mov.Causale.Contains("Prelievi"))
                             {
-                                mov.IDCategoriaIphase = context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code;
+                                mov.IDCategoriaIphase = 90;
+                            }
+                            else if (context.Keywords.Where(q => mov.Descrizione.ToLower().Trim().Contains(q.Keyword.Trim().ToLower())).Count() == 1)
+                            {
+                                mov.IDCategoriaIphase = context.Keywords.Where(q => mov.Descrizione.Trim().ToLower().Contains(q.Keyword.Trim().ToLower())).First().IDVoce_Code;
+                            }
+                            else if (mov.Causale.Contains("Pagamenti POS"))
+                            {
+                                mov.IDCategoriaIphase = 92;
                             }
                             else
                                 mov.IDCategoriaIphase = -1;
-
 
                             context.Movimenti.Add(mov);
 
