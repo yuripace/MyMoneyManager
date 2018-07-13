@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="MyMoneyManagerModel.CategorieUbiBanca" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.ContiCorrente" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.Function" Width="1.5" PointX="5.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMoneyManagerModel.Keywords" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.Movimenti" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.PagamentiIphase" Width="1.5" PointX="5.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.Role" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
@@ -25,6 +24,8 @@
         <AssociationConnector Association="MyMoneyManagerModel.FK_tReportCategorieMeseUbi_CategorieUbiBanca" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_ContiCorrente" ManuallyRouted="false" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.Keywords" Width="1.5" PointX="8" PointY="13" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Keywords_CategorieIphase" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

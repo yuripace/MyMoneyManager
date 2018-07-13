@@ -15,7 +15,9 @@ namespace Iphaser.Agenti.Model
     public partial class Keywords
     {
         public string Keyword { get; set; }
-        public string IDVoce_Code { get; set; }
+        public Nullable<int> IDVoce_Code { get; set; }
         public int id { get; set; }
+    
+        public virtual CategorieIphase CategorieIphase { get; set; }
     }
 }

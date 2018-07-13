@@ -43,7 +43,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="Keyword" Type="varchar" MaxLength="50" />
-          <Property Name="IDVoce_Code" Type="nchar" MaxLength="10" />
+          <Property Name="IDVoce_Code" Type="int" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Movimenti">
@@ -117,6 +117,18 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Descrizione" Type="varchar" MaxLength="255" />
           <Property Name="RN" Type="bigint" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Keywords_CategorieIphase">
+          <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
+          <End Role="Keywords" Type="Self.Keywords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Keywords">
+              <PropertyRef Name="IDVoce_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Movimenti_Carte">
           <End Role="Carte" Type="Self.Carte" Multiplicity="0..1" />
           <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
@@ -219,6 +231,10 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
     [vReportCategorieUbi].[RN] AS [RN]
     FROM [dbo].[vReportCategorieUbi] AS [vReportCategorieUbi]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Keywords_CategorieIphase" Association="Self.FK_Keywords_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="Keywords" EntitySet="Keywords" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movimenti_Carte" Association="Self.FK_Movimenti_Carte">
             <End Role="Carte" EntitySet="Carte" />
             <End Role="Movimenti" EntitySet="Movimenti" />
@@ -267,6 +283,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Tipo" Type="Int32" />
           <NavigationProperty Name="tReportCategorieMeseIpase" Relationship="MyMoneyManagerModel.FK_tReportCategorieMeseIpase_CategorieIphase" FromRole="CategorieIphase" ToRole="tReportCategorieMeseIpase" />
           <NavigationProperty Name="Movimenti" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="CategorieIphase" ToRole="Movimenti" />
+          <NavigationProperty Name="Keywords" Relationship="MyMoneyManagerModel.FK_Keywords_CategorieIphase" FromRole="CategorieIphase" ToRole="Keywords" />
         </EntityType>
         <EntityType Name="CategorieUbiBanca">
           <Key>
@@ -286,14 +303,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Descrizione" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Movimenti" Relationship="Self.FK_Movimenti_ContiCorrente" FromRole="ContiCorrente" ToRole="Movimenti" />
-        </EntityType>
-        <EntityType Name="Keywords">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IDVoce_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Movimenti">
           <Key>
@@ -365,7 +374,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <EntitySet Name="CategorieIphase" EntityType="Self.CategorieIphase" />
           <EntitySet Name="CategorieUbiBanca" EntityType="Self.CategorieUbiBanca" />
           <EntitySet Name="ContiCorrente" EntityType="Self.ContiCorrente" />
-          <EntitySet Name="Keywords" EntityType="Self.Keywords" />
           <EntitySet Name="Movimenti" EntityType="Self.Movimenti" />
           <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" />
           <AssociationSet Name="FK_Movimenti_Carte" Association="Self.FK_Movimenti_Carte">
@@ -395,6 +403,11 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <AssociationSet Name="FK_Movimenti_CategorieIphase" Association="MyMoneyManagerModel.FK_Movimenti_CategorieIphase">
             <End Role="CategorieIphase" EntitySet="CategorieIphase" />
             <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <EntitySet Name="Keywords" EntityType="MyMoneyManagerModel.Keywords" />
+          <AssociationSet Name="FK_Keywords_CategorieIphase" Association="MyMoneyManagerModel.FK_Keywords_CategorieIphase">
+            <End Role="CategorieIphase" EntitySet="CategorieIphase" />
+            <End Role="Keywords" EntitySet="Keywords" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tReportCategorieMeseIpase">
@@ -477,6 +490,27 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Keywords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDVoce_Code" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CategorieIphase" Relationship="MyMoneyManagerModel.FK_Keywords_CategorieIphase" FromRole="Keywords" ToRole="CategorieIphase" />
+        </EntityType>
+        <Association Name="FK_Keywords_CategorieIphase">
+          <End Type="MyMoneyManagerModel.CategorieIphase" Role="CategorieIphase" Multiplicity="0..1" />
+          <End Type="MyMoneyManagerModel.Keywords" Role="Keywords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieIphase">
+              <PropertyRef Name="IDVoce" />
+            </Principal>
+            <Dependent Role="Keywords">
+              <PropertyRef Name="IDVoce_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -517,15 +551,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
                 <ScalarProperty Name="IDBanca" ColumnName="IDBanca" />
                 <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Keywords">
-            <EntityTypeMapping TypeName="MyMoneyManagerModel.Keywords">
-              <MappingFragment StoreEntitySet="Keywords">
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="IDVoce_Code" ColumnName="IDVoce_Code" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -599,6 +624,15 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
                 <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
                 <ScalarProperty Name="Mese" ColumnName="Mese" />
                 <ScalarProperty Name="Anno" ColumnName="Anno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keywords">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.Keywords">
+              <MappingFragment StoreEntitySet="Keywords">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IDVoce_Code" ColumnName="IDVoce_Code" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

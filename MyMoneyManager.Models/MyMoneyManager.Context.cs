@@ -30,7 +30,6 @@ namespace MyMoneyManager.Models
         public virtual DbSet<CategorieUbiBanca> CategorieUbiBanca { get; set; }
         public virtual DbSet<ContiCorrente> ContiCorrente { get; set; }
         public virtual DbSet<Function> Function { get; set; }
-        public virtual DbSet<Keywords> Keywords { get; set; }
         public virtual DbSet<Movimenti> Movimenti { get; set; }
         public virtual DbSet<PagamentiIphase> PagamentiIphase { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -39,5 +38,6 @@ namespace MyMoneyManager.Models
         public virtual DbSet<tReportCategorieMeseUbi> tReportCategorieMeseUbi { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Log4Net> Log4Net { get; set; }
+        public virtual DbSet<Keywords> Keywords { get; set; }
     }
 }

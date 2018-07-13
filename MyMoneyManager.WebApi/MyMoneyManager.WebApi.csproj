@@ -203,7 +203,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CategorieIphasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeywordsController.cs" />
     <Compile Include="Controllers\MovimentisController.cs" />
     <Compile Include="Controllers\tReportCategorieMeseIpasesController.cs" />
     <Compile Include="Controllers\tReportCategorieMeseUbisController.cs" />
@@ -11998,6 +12000,16 @@
     <Content Include="static\sass\pages\profile.scss" />
     <Content Include="static\sass\pages\search.scss" />
     <Content Include="static\sass\pages\tasks.scss" />
+    <Content Include="Views\CategorieIphases\Create.cshtml" />
+    <Content Include="Views\CategorieIphases\Delete.cshtml" />
+    <Content Include="Views\CategorieIphases\Details.cshtml" />
+    <Content Include="Views\CategorieIphases\Edit.cshtml" />
+    <Content Include="Views\CategorieIphases\Index.cshtml" />
+    <Content Include="Views\Keywords\Create.cshtml" />
+    <Content Include="Views\Keywords\Delete.cshtml" />
+    <Content Include="Views\Keywords\Details.cshtml" />
+    <Content Include="Views\Keywords\Edit.cshtml" />
+    <Content Include="Views\Keywords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

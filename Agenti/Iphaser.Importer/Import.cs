@@ -16,13 +16,21 @@ namespace Iphaser.Importer
 {
     public class Import
     {
-
+         
         public static void Main(string[] args)
         {
-            DataSet ds;
-            ds = LeggiFile();
-            bool start = false;
+
+            ElaboraMovimenti(4923);
+            ElaboraMovimenti(1047);
+        }
+
+        public static void ElaboraMovimenti(int IDConto)
+        {
             MyMoneyManagerEntities context = new MyMoneyManagerEntities();
+            DataSet ds;
+            ds = LeggiFile(IDConto);
+            bool start = false;
+
 
             #region Import Movimenti
             foreach (DataRowView item in ds.Tables[0].DefaultView)
@@ -45,7 +53,7 @@ namespace Iphaser.Importer
                         {
                             mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
                             mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
-                            mov.IDContoCorrente = 4923;
+                            mov.IDContoCorrente = IDConto;
                             mov.Importo = Decimal.Parse(row[3].ToString().Replace(".", ","));
                             mov.Divisa = row[4].ToString();
                             mov.Descrizione = row[5].ToString();
@@ -71,9 +79,9 @@ namespace Iphaser.Importer
 
                             }
 
-                            if (context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).Count() == 1)
+                            if (context.Keywords.Where(q => mov.Descrizione.ToLower().Trim().Contains(q.Keyword.Trim().ToLower())).Count() == 1)
                             {
-                                mov.IDCategoriaIphase = int.Parse(context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code);
+                                mov.IDCategoriaIphase = context.Keywords.Where(q => mov.Descrizione.ToLower().Contains(q.Keyword.ToLower())).First().IDVoce_Code;
                             }
                             else
                                 mov.IDCategoriaIphase = -1;
@@ -92,14 +100,13 @@ namespace Iphaser.Importer
             }
             #endregion
             context.SaveChanges();
-
         }
 
-        public static DataSet LeggiFile()
+        public static DataSet LeggiFile(int IDConto)
         {
             DataSet ds;
-            var extension = Path.GetExtension("C:\\Saldo_e_Movimenti_4923.xls").ToLower();
-            using (var stream = new FileStream("C:\\Saldo_e_Movimenti_4923.xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            var extension = Path.GetExtension("C:\\Saldo_e_Movimenti_" + IDConto.ToString() + ".xls").ToLower();
+            using (var stream = new FileStream("C:\\Saldo_e_Movimenti_" + IDConto.ToString() + ".xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 IExcelDataReader reader = null;
                 if (extension == ".xls")

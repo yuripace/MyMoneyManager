@@ -19,6 +19,7 @@ namespace MyMoneyManager.Models
         {
             this.tReportCategorieMeseIpase = new HashSet<tReportCategorieMeseIpase>();
             this.Movimenti = new HashSet<Movimenti>();
+            this.Keywords = new HashSet<Keywords>();
         }
     
         public int IDVoce { get; set; }
@@ -29,5 +30,7 @@ namespace MyMoneyManager.Models
         public virtual ICollection<tReportCategorieMeseIpase> tReportCategorieMeseIpase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimenti> Movimenti { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Keywords> Keywords { get; set; }
     }
 }
