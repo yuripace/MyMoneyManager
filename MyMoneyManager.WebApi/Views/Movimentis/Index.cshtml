@@ -88,19 +88,16 @@
                 <table class="table table-striped table-bordered table-hover dataTables-example" id="sample_2">
                     <thead>
                         <tr>
-                            <th width=5%>
+                            <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
                             <th width=5%>
                                 @Html.DisplayNameFor(model => model.Importo)
                             </th>
-                            <th width=50%>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Causale)
-                            </th>
-                            <th>
+                            <th width=50%>
                                 @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
                             </th>
                             <th></th>
@@ -110,19 +107,16 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td width=5%>
+                                <td width=3%>
                                     @Html.DisplayFor(modelItem => item.DataValuta)
                                 </td>
                                 <td width=5%>
                                     @Html.DisplayFor(modelItem => item.Importo)
                                 </td>
-                                <td width=50%>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Descrizione)
                                 </td>
-                                <td width=1%>
-                                    @Html.DisplayFor(modelItem => item.Causale)
-                                </td>
-                                <td>
+                                <td  width=50%>
                                     @Html.DisplayFor(modelItem => item.CategorieIphase.Descrizione)
                                 </td>
                                 <td>
@@ -134,19 +128,16 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>
+                            <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
-                            <th>
+                            <th width=5%>
                                 @Html.DisplayNameFor(model => model.Importo)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Causale)
-                            </th>
-                            <th>
+                            <th width=50%>
                                 @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
                             </th>
                             <th></th>
@@ -172,6 +163,7 @@
                     exportOptions: {
                         columns: [1, 2, 3, 4, 5, 6, 7]
                     }
+
                 },
                 {
                     extend: 'csv',
@@ -205,10 +197,9 @@
                     }
                 }
             ],
-            
-
         });
 
+        $('#your_button_id').removeClass('btn-default');
         // Setup - add a text input to each footer cell
         $('.dataTables-example tfoot th').each(function () {
             var title = $(this).text();
@@ -235,14 +226,6 @@
 
     });
 
-    $('body').on('change', '#mass_select_all', function () {
-        var rows, checked;
-        rows = $('#dataTables-example').find('tbody tr');
-        checked = $(this).prop('checked');
-        $.each(rows, function () {
-            var checkbox = $($(this).find('td').eq(0)).find('input').prop('checked', checked);
-        });
-    });
 
     var del = function (id) {
         var txt;

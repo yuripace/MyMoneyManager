@@ -19,11 +19,10 @@ namespace MyMoneyManager.WebApi.Controllers
         [ChildActionOnly]
         public ActionResult ElencoMovimenti()
         {
-            Models.Movimenti model = new Models.Movimenti();
+            MovimentisController mc = new MovimentisController();
             //return PartialView("_EmployeeRegistration", model);
-
-            var movimenti = model;
-            return PartialView(movimenti);
+          
+            return PartialView(mc.Index());
         }
     }
 }
