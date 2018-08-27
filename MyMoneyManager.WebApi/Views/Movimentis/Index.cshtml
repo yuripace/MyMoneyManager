@@ -88,9 +88,24 @@
                 <table class="table table-striped table-bordered table-hover dataTables-example" id="sample_2">
                     <thead>
                         <tr>
-                            <th>
-
+                            
+                            <th width=3%>
+                                @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
+                            <th width=5%>
+                                @Html.DisplayNameFor(model => model.Importo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Descrizione)
+                            </th>
+                            <th width=50%>
+                                Categoria
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <thead class="filters">
+                        <tr>
                             <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
@@ -103,14 +118,13 @@
                             <th width=50%>
                                 @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
                             </th>
-                            <th></th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td></td>
                                 <td width=3%>
                                     @Html.DisplayFor(modelItem => item.DataValuta)
                                 </td>
@@ -132,18 +146,19 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th></th>
                             <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
                             <th width=5%>
-                                @Html.DisplayNameFor(model => model.Importo)
+                                Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
+                                <br />
+                                Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
                             <th width=50%>
-                                @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
+                                Categoria
                             </th>
                             <th></th>
                         </tr>
@@ -166,9 +181,9 @@
 
         //$('#your_button_id').removeClass('btn-default');
         // Setup - add a text input to each footer cell
-        $('.dataTables-example tfoot th').each(function () {
-            var title = $(this).text();
-            $(this).html('<input type="text" placeholder="Ricerca" />');
+        $('.dataTables-example .filters th').each(function () {
+            var title = $(this).text().trim();
+            $(this).html('<input type="text" placeholder="Ricerca ' + title + '"  />');
         });
 
         // DataTable
@@ -187,7 +202,7 @@
             });
         });
 
-        $('.dataTables-example tfoot tr').appendTo('.dataTables-example thead');
+  
 
     });
 
