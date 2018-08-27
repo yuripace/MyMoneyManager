@@ -18,7 +18,7 @@ namespace MyMoneyManager.WebApi.Controllers
         // GET: tReportCategorieMeseIpases
         public async Task<ActionResult> Index()
         {
-            var tReportCategorieMeseIpase = db.tReportCategorieMeseIpase.Include(t => t.CategorieIphase);
+            var tReportCategorieMeseIpase = db.tReportCategorieMeseIpase.Include(t => t.CategorieIphase).OrderByDescending(q=>q.Anno).ThenByDescending(q=>q.Mese);
             return View(await tReportCategorieMeseIpase.ToListAsync());
         }
 
