@@ -88,7 +88,7 @@
                 <table class="table table-striped table-bordered table-hover dataTables-example" id="sample_2">
                     <thead>
                         <tr>
-                            
+
                             <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataValuta)
                             </th>
@@ -102,23 +102,6 @@
                                 Categoria
                             </th>
                             <th></th>
-                        </tr>
-                    </thead>
-                    <thead class="filters">
-                        <tr>
-                            <th width=3%>
-                                @Html.DisplayNameFor(model => model.DataValuta)
-                            </th>
-                            <th width=5%>
-                                @Html.DisplayNameFor(model => model.Importo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Descrizione)
-                            </th>
-                            <th width=50%>
-                                @Html.DisplayNameFor(model => model.CategorieIphase.Descrizione)
-                            </th>
-                           
                         </tr>
                     </thead>
                     <tbody>
@@ -144,6 +127,25 @@
                             </tr>
                         }
                     </tbody>
+                    <tfoot class="filters">
+                        <tr>
+                            <th width=3%>
+                                @Html.DisplayNameFor(model => model.DataValuta)
+                            </th>
+                            <th width=5%>
+                                Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
+                                <br />
+                                Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Descrizione)
+                            </th>
+                            <th width=50%>
+                                Categoria
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                     <tfoot>
                         <tr>
                             <th width=3%>
@@ -163,6 +165,7 @@
                             <th></th>
                         </tr>
                     </tfoot>
+
                 </table>
             </div>
         </div>
@@ -179,11 +182,11 @@
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>"
         });
 
-        //$('#your_button_id').removeClass('btn-default');
+        $('#your_button_id').removeClass('btn-default');
         // Setup - add a text input to each footer cell
-        $('.dataTables-example .filters th').each(function () {
-            var title = $(this).text().trim();
-            $(this).html('<input type="text" placeholder="Ricerca ' + title + '"  />');
+        $('.dataTables-example tfoot.filters th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Ricerca" />');
         });
 
         // DataTable
@@ -202,24 +205,10 @@
             });
         });
 
-  
+        $('.dataTables-example tfoot.filters tr').appendTo('.dataTables-example thead');
 
     });
 
-
-    var del = function (id) {
-        var txt;
-        var r = confirm("Cancellare l'accesso selezionato?");
-        if (r === true) {
-            $.ajax({
-                url: '..\/..\/server_side/cancellarecord.php?ID=' + id,
-                type: 'POST',
-                data: { id: id },
-                success: function (data) {
-                    console.log(data); // Inspect this in your console
-                }
-            });
-        }
-    }
 </script>
+
 
