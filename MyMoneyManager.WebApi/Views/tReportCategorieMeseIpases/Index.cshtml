@@ -17,7 +17,7 @@
                 <table class="table table-striped table-bordered table-hover dataTables-example" id="sample_2">
                     <thead>
                         <tr>
-                            <th></th>
+
                             <th>
                                 @Html.DisplayNameFor(model => model.Anno)
                             </th>
@@ -37,7 +37,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td></td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Anno)
                                 </td>
@@ -95,6 +94,7 @@
                     exportOptions: {
                         columns: [1, 2, 3, 4, 5, 6, 7]
                     }
+
                 },
                 {
                     extend: 'csv',
@@ -128,41 +128,33 @@
                     }
                 }
             ],
-            columnDefs: [{
-                'targets': 0,
-                'searchable': false,
-                'orderable': false,
-                'className': 'dt-body-center',
-                'render': function (data, type, full, meta) {
-                    return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-                }
-            }],
-
         });
 
-    });
-
-    $('body').on('change', '#mass_select_all', function () {
-        var rows, checked;
-        rows = $('#dataTables-example').find('tbody tr');
-        checked = $(this).prop('checked');
-        $.each(rows, function () {
-            var checkbox = $($(this).find('td').eq(0)).find('input').prop('checked', checked);
+        $('#your_button_id').removeClass('btn-default');
+        // Setup - add a text input to each footer cell
+        $('.dataTables-example tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Ricerca" />');
         });
-    });
 
-    var del = function (id) {
-        var txt;
-        var r = confirm("Cancellare l'accesso selezionato?");
-        if (r == true) {
-            $.ajax({
-                url: '..\/..\/server_side/cancellarecord.php?ID=' + id,
-                type: 'POST',
-                data: { id: id },
-                success: function (data) {
-                    console.log(data); // Inspect this in your console
+        // DataTable
+        var table = $('.dataTables-example').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
                 }
             });
-        }
-    }
+        });
+
+        $('.dataTables-example tfoot tr').appendTo('.dataTables-example thead');
+
+    });
 </script>
+
