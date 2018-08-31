@@ -61,7 +61,7 @@ namespace Iphaser.CalcolaCategorie
 
             #region Calcolo report UBI
             //var calcolo = context.Movimenti.Where(q => q.IDCategoriaIphase != null).GroupBy(q => q.IDCategoriaIphase).Sum(q => new { q. }q.Sum(e => e.Importo)).;
-            var calcoloubi = context.Movimenti.Where(q => q.IDCategoria != null).GroupBy(x => new { x.IDCategoria, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Year, DbFunctions.CreateDateTime(x.DataValuta.Value.Year, x.DataValuta.Value.Month, x.DataValuta.Value.Day, 0, 0, 0).Value.Month }).SelectMany(rr => rr.Select(r => new { IDCategoria = rr.Key.IDCategoria, Anno = rr.Key.Year, Mese = rr.Key.Month, Totale = rr.Sum(t => t.Importo) }));
+            var calcoloubi = context.Movimenti.Where(q => q.IDCategoria != null).GroupBy(x => new { x.IDCategoria, DbFunctions.CreateDateTime(x.DataContabile.Value.Year, x.DataContabile.Value.Month, x.DataContabile.Value.Day, 0, 0, 0).Value.Year, DbFunctions.CreateDateTime(x.DataContabile.Value.Year, x.DataContabile.Value.Month, x.DataContabile.Value.Day, 0, 0, 0).Value.Month }).SelectMany(rr => rr.Select(r => new { IDCategoria = rr.Key.IDCategoria, Anno = rr.Key.Year, Mese = rr.Key.Month, Totale = rr.Sum(t => t.Importo) }));
             foreach (var item in calcoloubi)
             {
                 tReportCategorieMeseUbi rep = new tReportCategorieMeseUbi();

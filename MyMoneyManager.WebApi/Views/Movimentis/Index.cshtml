@@ -90,7 +90,7 @@
                         <tr>
 
                             <th width=3%>
-                                @Html.DisplayNameFor(model => model.DataValuta)
+                                @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
                                 @Html.DisplayNameFor(model => model.Importo)
@@ -109,7 +109,7 @@
                         {
                             <tr>
                                 <td width=3%>
-                                    @Html.DisplayFor(modelItem => item.DataValuta)
+                                    @Html.DisplayFor(modelItem => item.DataContabile)
                                 </td>
                                 <td width=5%>
                                     @Html.DisplayFor(modelItem => item.Importo)
@@ -130,7 +130,7 @@
                     <tfoot class="filters">
                         <tr>
                             <th width=3%>
-                                @Html.DisplayNameFor(model => model.DataValuta)
+                                @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
@@ -149,7 +149,7 @@
                     <tfoot>
                         <tr>
                             <th width=3%>
-                                @Html.DisplayNameFor(model => model.DataValuta)
+                                @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)

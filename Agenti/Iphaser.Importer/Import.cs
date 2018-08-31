@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ExcelDataReader;
+using Iphaser.Agenti.Model;
+using System;
 using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using ExcelDataReader;
-using Iphaser.Agenti.Model;
 //using Iphaser.Services;
 
 /*LEGGE IN AUTOMATICO IL FILE EXCEL E LO BUTTA NELLA TABELLA MOVIMENTI*/
@@ -16,12 +12,74 @@ namespace Iphaser.Importer
 {
     public class Import
     {
-         
+
         public static void Main(string[] args)
         {
 
             ElaboraMovimenti(4923);
             ElaboraMovimenti(1047);
+
+            ElaboraCartaCredito("8470");
+            ElaboraCartaCredito("0517");
+
+        }
+
+        public static void ElaboraCartaCredito(string IDConto)
+        {
+            MyMoneyManagerEntities context = new MyMoneyManagerEntities();
+            DataSet ds;
+            ds = LeggiCartaCredito(IDConto);
+            bool start = false;
+
+
+            #region Import Movimenti
+            foreach (DataRowView item in ds.Tables[0].DefaultView)
+            {
+                int i = 0;
+                foreach (DataRow row in item.DataView.Table.Rows)
+                {
+                    i++;
+                    if (i <= 20)
+                    {
+                        ;
+                    }
+                    else if (start)
+                    {
+                        Movimenti mov = new Movimenti();
+
+                        if (!row.IsNull(1))
+                        {
+                            mov.Descrizione = row[3].ToString();
+                            if (mov.Descrizione.ToLower().Trim().Equals("PAGAMENTO CON ADDEBITO") == false)
+                            {
+                                mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
+                                mov.DataValuta = DateTime.Parse(row[1].ToString()).Date;
+                                mov.IDContoCorrente = 1047;
+                                mov.Importo = -(Decimal.Parse(row[2].ToString().Replace(".", ",")));
+                                mov.Divisa = "EUR";
+
+                                mov.Causale = "";
+
+                                if (context.Keywords.Where(q => mov.Descrizione.ToLower().Trim().Contains(q.Keyword.Trim().ToLower())).Count() == 1)
+                                {
+                                    mov.IDCategoriaIphase = context.Keywords.Where(q => mov.Descrizione.Trim().ToLower().Contains(q.Keyword.Trim().ToLower())).First().IDVoce_Code;
+                                }
+                                else
+                                    mov.IDCategoriaIphase = -1;
+
+                                context.Movimenti.Add(mov);
+                            }
+                        }
+                    }
+                    else if (row[1].ToString().Trim().ToLower().Equals("data contabile"))
+                    {
+                        start = true;
+                    }
+                }
+                break;
+            }
+            #endregion
+            context.SaveChanges();
         }
 
         public static void ElaboraMovimenti(int IDConto)
@@ -51,7 +109,7 @@ namespace Iphaser.Importer
                         //Tessera: Carta di credito padre (la mia). IDCarta chi ha effettivamente usato.
                         if (!row.IsNull(1))
                         {
-                           
+
                             mov.DataContabile = DateTime.Parse(row[1].ToString()).Date;
                             mov.DataValuta = DateTime.Parse(row[2].ToString()).Date;
                             mov.IDContoCorrente = IDConto;
@@ -59,6 +117,8 @@ namespace Iphaser.Importer
                             mov.Divisa = row[4].ToString();
                             mov.Descrizione = row[5].ToString();
                             mov.Causale = row[6].ToString();
+
+                            #region Categorie UBI
                             Regex _regex = new Regex(@"CAT.\s*MERC.\s*\(\d+");
                             // This calls the static method specified.
                             Match match = _regex.Match(mov.Descrizione);
@@ -77,9 +137,24 @@ namespace Iphaser.Importer
                                         context.CategorieUbiBanca.Add(ubicat);
                                     }
                                 }
-
                             }
+                            #endregion
 
+                            #region Tes. N.
+                            Regex _regex2 = new Regex(@"TES.\s*N.\s*\s*([^\s]+)");
+                            // This calls the static method specified.
+                            Match match2 = _regex2.Match(mov.Descrizione);
+                            if (match2.Success)
+                            {
+                                //Console.WriteLine("Value:" + match.Groups[0].Value.ToString().Replace("CAT.MERC. (", ""));
+                                string id = Regex.Replace(match2.Groups[0].Value.ToString(), "TES.\\s*N.\\s*", "");
+
+                                if (!String.IsNullOrEmpty(id))
+                                {
+                                    mov.IDCarta = id;
+                                }
+                            }
+                            #endregion
                             if (mov.Causale.Contains("Prelievi"))
                             {
                                 mov.IDCategoriaIphase = 90;
@@ -110,6 +185,42 @@ namespace Iphaser.Importer
             context.SaveChanges();
         }
 
+        public static DataSet LeggiCartaCredito(string IDConto)
+        {
+            DataSet ds;
+            var extension = Path.GetExtension("C:\\Movimenti_Hybrid_" + IDConto.ToString() + ".xls").ToLower();
+            using (var stream = new FileStream("C:\\Movimenti_Hybrid_" + IDConto.ToString() + ".xls", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                IExcelDataReader reader = null;
+                if (extension == ".xls")
+                {
+                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                }
+                else if (extension == ".xlsx")
+                {
+                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
+                else if (extension == ".csv")
+                {
+                    reader = ExcelReaderFactory.CreateCsvReader(stream);
+                }
+
+                if (reader == null)
+                    return null;
+
+                using (reader)
+                {
+                    ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    {
+                        ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
+                        {
+                        }
+                    });
+                }
+                return ds;
+            }
+        }
+
         public static DataSet LeggiFile(int IDConto)
         {
             DataSet ds;
@@ -132,46 +243,17 @@ namespace Iphaser.Importer
 
                 if (reader == null)
                     return null;
-
-                // reader.IsFirstRowAsColumnNames = firstRowNamesCheckBox.Checked;
-                //var sw = new Stopwatch();
-                //sw.Start();
                 using (reader)
                 {
                     ds = reader.AsDataSet(new ExcelDataSetConfiguration()
                     {
                         ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
                         {
-                            /*UseHeaderRow = firstRowNamesCheckBox.Checked*/
                         }
                     });
                 }
                 return ds;
-                //toolStripStatusLabel1.Text = "Elapsed: " + sw.ElapsedMilliseconds.ToString() + " ms";
-
-                // var tablenames = GetTablenames(ds.Tables);
-                /* sheetCombo.DataSource = tablenames;
-
-                 if (tablenames.Count > 0)
-                     sheetCombo.SelectedIndex = 0;
-
-                 // dataGridView1.DataSource = ds;
-                 // dataGridView1.DataMember*/
-
             }
         }
-
-        /*
-        private static IList<string> GetTablenames(DataTableCollection tables)
-        {
-            var tableList = new List<string>();
-            foreach (var table in tables)
-            {
-                tableList.Add(table.ToString());
-            }
-
-            return tableList;
-        }*/
-
     }
 }

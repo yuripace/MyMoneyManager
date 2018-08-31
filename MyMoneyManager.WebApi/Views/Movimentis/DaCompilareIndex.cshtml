@@ -97,7 +97,7 @@
                             <th>
                                 DataValuta
                             </th>
-                            <th>
+                            <th class="total">
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
