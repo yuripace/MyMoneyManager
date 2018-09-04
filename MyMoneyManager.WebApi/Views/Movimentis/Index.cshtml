@@ -89,10 +89,10 @@
                     <thead>
                         <tr>
 
-                            <th width=1%>
+                            <th width=50>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
-                            <th width=5%>
+                            <th width=2%>
                                 @Html.DisplayNameFor(model => model.Importo)
                             </th>
                             <th  width=50%>
@@ -108,10 +108,10 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td width=1%>
+                                <td width=50>
                                     @Html.DisplayFor(modelItem => item.DataContabile)
                                 </td>
-                                <td width=5%>
+                                <td width=2%>
                                     @Html.DisplayFor(modelItem => item.Importo)
                                 </td>
                                 <td width=50%>
@@ -129,10 +129,10 @@
                     </tbody>
                     <tfoot class="filters">
                         <tr>
-                            <th width=1%>
+                            <th width=50>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
-                            <th width=5%>
+                            <th width=2%>
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
@@ -151,7 +151,7 @@
                             <th width=3%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
-                            <th width=5%>
+                            <th width=2%>
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
@@ -174,7 +174,8 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').DataTable({
-            pageLength: 10,
+            pageLength: 25,
+            autoWidth: true,
             responsive: true,
             dom:
                 "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -186,7 +187,8 @@
         // Setup - add a text input to each footer cell
         $('.dataTables-example tfoot.filters th').each(function () {
             var title = $(this).text();
-            $(this).html('<input type="text" placeholder="Ricerca" />');
+            
+            $(this).html('<input type="text"/>');
         });
 
         // DataTable
@@ -206,7 +208,8 @@
         });
 
         $('.dataTables-example tfoot.filters tr').appendTo('.dataTables-example thead');
-
+        $('#container').css('display', 'block');
+        table.columns.adjust().draw();
     });
 
 </script>

@@ -92,13 +92,13 @@
                             <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
-                            <th width=5%>
+                            <th width=2%>
                                 @Html.DisplayNameFor(model => model.Importo)
                             </th>
-                            <th>
+                            <th width=50%>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th width=50%>
+                            <th>
                                 Categoria
                             </th>
                             <th></th>
@@ -109,15 +109,15 @@
                         {
                             <tr>
                                 <td width=1%>
-                                    @Html.DisplayFor(modelItem => item.DataContabile.Value.Date)
+                                    @Html.DisplayFor(modelItem => item.DataContabile)
                                 </td>
-                                <td width=5%>
+                                <td width=2%>
                                     @Html.DisplayFor(modelItem => item.Importo)
                                 </td>
-                                <td>
+                                <td width=50%>
                                     @Html.DisplayFor(modelItem => item.Descrizione)
                                 </td>
-                                <td width=50%>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.CategorieIphase.Descrizione)
                                 </td>
                                 <td>
@@ -132,15 +132,15 @@
                             <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
-                            <th width=5%>
+                            <th width=2%>
                                 Entrate: @Html.DisplayFor(model => model.Where(q => q.Importo > 0).Sum(q => q.Importo).Value)
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
                             </th>
-                            <th>
+                            <th width=50%>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th width=50%>
+                            <th>
                                 Categoria
                             </th>
                             <th></th>
@@ -174,7 +174,8 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').DataTable({
-            pageLength: 10,
+            pageLength: 25,
+            autoWidth: true,
             responsive: true,
             dom:
                 "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -186,7 +187,8 @@
         // Setup - add a text input to each footer cell
         $('.dataTables-example tfoot.filters th').each(function () {
             var title = $(this).text();
-            $(this).html('<input type="text" placeholder="Ricerca" />');
+            
+            $(this).html('<input type="text" />');
         });
 
         // DataTable
@@ -206,9 +208,10 @@
         });
 
         $('.dataTables-example tfoot.filters tr').appendTo('.dataTables-example thead');
-
+        $('#container').css('display', 'block');
+        table.columns.adjust().draw();
     });
-
+    
 </script>
 
 
