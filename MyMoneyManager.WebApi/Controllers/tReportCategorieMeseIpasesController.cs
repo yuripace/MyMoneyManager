@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyMoneyManager.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using MyMoneyManager.Models;
 
 namespace MyMoneyManager.WebApi.Controllers
 {
@@ -18,7 +15,7 @@ namespace MyMoneyManager.WebApi.Controllers
         // GET: tReportCategorieMeseIpases
         public async Task<ActionResult> Index()
         {
-            var tReportCategorieMeseIpase = db.tReportCategorieMeseIpase.Include(t => t.CategorieIphase).OrderByDescending(q=>q.Anno).ThenByDescending(q=>q.Mese);
+            var tReportCategorieMeseIpase = db.tReportCategorieMeseIpase.Include(t => t.CategorieIphase).OrderByDescending(q => q.Anno).ThenByDescending(q => q.Mese);
             return View(await tReportCategorieMeseIpase.ToListAsync());
         }
 
@@ -34,7 +31,12 @@ namespace MyMoneyManager.WebApi.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tReportCategorieMeseIpase);
+            int? idcat = tReportCategorieMeseIpase.IDCategoria;
+            System.DateTime stdate = System.DateTime.Parse("01/" + tReportCategorieMeseIpase.Mese.ToString() + "/" + tReportCategorieMeseIpase.Anno.ToString());
+
+            System.DateTime enddate = System.DateTime.Parse(System.DateTime.DaysInMonth(tReportCategorieMeseIpase.Anno.Value, tReportCategorieMeseIpase.Mese.Value) + "/" + tReportCategorieMeseIpase.Mese.ToString() + "/" + tReportCategorieMeseIpase.Anno.ToString());
+            var mov = db.Movimenti.Where(q => q.IDCategoriaIphase == idcat && q.DataContabile>stdate && q.DataContabile < enddate);
+            return View(mov);
         }
 
         // GET: tReportCategorieMeseIpases/Create

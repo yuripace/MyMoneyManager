@@ -11027,7 +11027,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Movimenti\View.cshtml" />
     <Content Include="Views\Movimentis\Create.cshtml" />
     <Content Include="Views\Movimentis\Delete.cshtml" />
     <Content Include="Views\Movimentis\Details.cshtml" />
