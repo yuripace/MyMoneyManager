@@ -89,7 +89,7 @@
                     <thead>
                         <tr>
 
-                            <th width=3%>
+                            <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
@@ -108,8 +108,8 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td width=3%>
-                                    @Html.DisplayFor(modelItem => item.DataContabile)
+                                <td width=1%>
+                                    @Html.DisplayFor(modelItem => item.DataContabile.Value.Date)
                                 </td>
                                 <td width=5%>
                                     @Html.DisplayFor(modelItem => item.Importo)
@@ -129,7 +129,7 @@
                     </tbody>
                     <tfoot class="filters">
                         <tr>
-                            <th width=3%>
+                            <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
@@ -148,7 +148,7 @@
                     </tfoot>
                     <tfoot>
                         <tr>
-                            <th width=3%>
+                            <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>

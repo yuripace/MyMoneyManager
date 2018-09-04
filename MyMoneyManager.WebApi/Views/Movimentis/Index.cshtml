@@ -89,16 +89,16 @@
                     <thead>
                         <tr>
 
-                            <th width=3%>
+                            <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
                                 @Html.DisplayNameFor(model => model.Importo)
                             </th>
-                            <th>
+                            <th  width=50%>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th width=50%>
+                            <th>
                                 Categoria
                             </th>
                             <th></th>
@@ -108,16 +108,16 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td width=3%>
+                                <td width=1%>
                                     @Html.DisplayFor(modelItem => item.DataContabile)
                                 </td>
                                 <td width=5%>
                                     @Html.DisplayFor(modelItem => item.Importo)
                                 </td>
-                                <td>
+                                <td width=50%>
                                     @Html.DisplayFor(modelItem => item.Descrizione)
                                 </td>
-                                <td width=50%>
+                                <td >
                                     @Html.DisplayFor(modelItem => item.CategorieIphase.Descrizione)
                                 </td>
                                 <td>
@@ -129,7 +129,7 @@
                     </tbody>
                     <tfoot class="filters">
                         <tr>
-                            <th width=3%>
+                            <th width=1%>
                                 @Html.DisplayNameFor(model => model.DataContabile)
                             </th>
                             <th width=5%>
@@ -137,10 +137,10 @@
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
                             </th>
-                            <th>
+                            <th width=50%>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th width=50%>
+                            <th>
                                 Categoria
                             </th>
                             <th></th>
@@ -156,10 +156,10 @@
                                 <br />
                                 Uscite: @Html.DisplayFor(model => model.Where(q => q.Importo < 0).Sum(q => q.Importo).Value)
                             </th>
-                            <th>
+                            <th  width=50%>
                                 @Html.DisplayNameFor(model => model.Descrizione)
                             </th>
-                            <th width=50%>
+                            <th>
                                 Categoria
                             </th>
                             <th></th>

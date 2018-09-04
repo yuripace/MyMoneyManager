@@ -11,11 +11,14 @@ namespace MyMoneyManager.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Movimenti
     {
         public int ID { get; set; }
         public Nullable<int> IDContoCorrente { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> DataContabile { get; set; }
         public Nullable<System.DateTime> DataValuta { get; set; }
         public Nullable<decimal> Importo { get; set; }
