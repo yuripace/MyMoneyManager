@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.Agenti.Model", "Iph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.ReportCategorie", "Iphaser.ReportCategorie\Iphaser.ReportCategorie.csproj", "{ADB448B9-794F-4C1F-88DA-892FB40F993B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.Report", "Iphaser.Report\Iphaser.Report.csproj", "{7E419DB4-0227-4206-B591-A16C95FCC727}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{ADB448B9-794F-4C1F-88DA-892FB40F993B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADB448B9-794F-4C1F-88DA-892FB40F993B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADB448B9-794F-4C1F-88DA-892FB40F993B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E419DB4-0227-4206-B591-A16C95FCC727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E419DB4-0227-4206-B591-A16C95FCC727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E419DB4-0227-4206-B591-A16C95FCC727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E419DB4-0227-4206-B591-A16C95FCC727}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
