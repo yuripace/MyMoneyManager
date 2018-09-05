@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.Agenti.Model", "Iph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.ReportCategorie", "Iphaser.ReportCategorie\Iphaser.ReportCategorie.csproj", "{ADB448B9-794F-4C1F-88DA-892FB40F993B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.Report", "Iphaser.Report\Iphaser.Report.csproj", "{7E419DB4-0227-4206-B591-A16C95FCC727}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iphaser.InviaReport", "Iphaser.Report\Iphaser.InviaReport.csproj", "{7E419DB4-0227-4206-B591-A16C95FCC727}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

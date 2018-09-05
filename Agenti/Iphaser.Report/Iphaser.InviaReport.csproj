@@ -5,9 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7E419DB4-0227-4206-B591-A16C95FCC727}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Iphaser.ReportCategorie</RootNamespace>
-    <AssemblyName>Iphaser.ReportCategorie</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Iphaser.InviaReport</RootNamespace>
+    <AssemblyName>Iphaser.InviaReport</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>Iphaser.InviaReport.InviaReport</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />

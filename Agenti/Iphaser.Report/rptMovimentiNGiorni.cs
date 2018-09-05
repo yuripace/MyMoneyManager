@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Iphaser.ReportCategorie {
+namespace Iphaser.InviaReport {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace Iphaser.ReportCategorie {
         
         public override string FullResourceName {
             get {
-                return "Iphaser.ReportCategorie.rptMovimentiNGiorni.rpt";
+                return "Iphaser.InviaReport.rptMovimentiNGiorni.rpt";
             }
             set {
                 // Do nothing
@@ -98,7 +98,7 @@ namespace Iphaser.ReportCategorie {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Giorni {
+        public CrystalDecisions.Shared.IParameterField Parameter_pGiorni {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }

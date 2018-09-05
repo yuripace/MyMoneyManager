@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Iphaser.ReportCategorie {
+namespace Iphaser.InviaReport {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace Iphaser.ReportCategorie {
         
         public override string FullResourceName {
             get {
-                return "Iphaser.ReportCategorie.rptRiepilogoNGiorni.rpt";
+                return "Iphaser.InviaReport.rptRiepilogoNGiorni.rpt";
             }
             set {
                 // Do nothing
