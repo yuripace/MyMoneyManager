@@ -16,14 +16,14 @@ namespace Iphaser.ReportCategorie {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptRiepilogo : ReportClass {
+    public class rptRiepilogoNGiorni : ReportClass {
         
-        public rptRiepilogo() {
+        public rptRiepilogoNGiorni() {
         }
         
         public override string ResourceName {
             get {
-                return "rptRiepilogo.rpt";
+                return "rptRiepilogoNGiorni.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Iphaser.ReportCategorie {
         
         public override string FullResourceName {
             get {
-                return "Iphaser.ReportCategorie.rptRiepilogo.rpt";
+                return "Iphaser.ReportCategorie.rptRiepilogoNGiorni.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace Iphaser.ReportCategorie {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptRiepilogo : Component, ICachedReport {
+    public class CachedrptRiepilogoNGiorni : Component, ICachedReport {
         
-        public CachedrptRiepilogo() {
+        public CachedrptRiepilogoNGiorni() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace Iphaser.ReportCategorie {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptRiepilogo rpt = new rptRiepilogo();
+            rptRiepilogoNGiorni rpt = new rptRiepilogoNGiorni();
             rpt.Site = this.Site;
             return rpt;
         }

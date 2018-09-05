@@ -70,10 +70,16 @@
   <ItemGroup>
     <Compile Include="InviaReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="rptRiepilogo.cs">
+    <Compile Include="rptMovimentiNGiorni.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>rptRiepilogo.rpt</DependentUpon>
+      <DependentUpon>rptMovimentiNGiorni.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptRiepilogoNGiorni.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptRiepilogoNGiorni.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -88,9 +94,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="rptRiepilogo.rpt">
+    <EmbeddedResource Include="rptMovimentiNGiorni.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptRiepilogo.cs</LastGenOutput>
+      <LastGenOutput>rptMovimentiNGiorni.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptRiepilogoNGiorni.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptRiepilogoNGiorni.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
