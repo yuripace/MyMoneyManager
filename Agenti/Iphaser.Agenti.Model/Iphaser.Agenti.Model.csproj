@@ -69,6 +69,9 @@
     <Compile Include="Movimenti.cs">
       <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MovimentiRipetitivi.cs">
+      <DependentUpon>MyMoneyManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MyMoneyManagerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

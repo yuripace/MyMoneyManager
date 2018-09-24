@@ -11,14 +11,11 @@ namespace MyMoneyManager.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Movimenti
     {
         public int ID { get; set; }
         public Nullable<int> IDContoCorrente { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> DataContabile { get; set; }
         public Nullable<System.DateTime> DataValuta { get; set; }
         public Nullable<decimal> Importo { get; set; }
@@ -28,10 +25,12 @@ namespace MyMoneyManager.Models
         public Nullable<int> IDCategoria { get; set; }
         public Nullable<int> IDCategoriaIphase { get; set; }
         public string IDCarta { get; set; }
+        public Nullable<int> IDMovimentoRipetitivo { get; set; }
     
         public virtual Carte Carte { get; set; }
         public virtual CategorieUbiBanca CategorieUbiBanca { get; set; }
         public virtual ContiCorrente ContiCorrente { get; set; }
         public virtual CategorieIphase CategorieIphase { get; set; }
+        public virtual MovimentiRipetitivi MovimentiRipetitivi { get; set; }
     }
 }

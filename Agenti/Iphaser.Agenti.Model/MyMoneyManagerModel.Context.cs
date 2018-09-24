@@ -36,5 +36,6 @@ namespace Iphaser.Agenti.Model
         public virtual DbSet<v_ReportCategorieIpase> v_ReportCategorieIpase { get; set; }
         public virtual DbSet<vReportCategorieUbi> vReportCategorieUbi { get; set; }
         public virtual DbSet<Keywords> Keywords { get; set; }
+        public virtual DbSet<MovimentiRipetitivi> MovimentiRipetitivi { get; set; }
     }
 }

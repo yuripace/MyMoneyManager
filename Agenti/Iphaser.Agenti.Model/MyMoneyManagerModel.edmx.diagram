@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="MyMoneyManagerModel.vReportCategorieUbi" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.Keywords" Width="1.5" PointX="8" PointY="1" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Keywords_CategorieIphase" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.MovimentiRipetitivi" Width="1.5" PointX="9.875" PointY="3.25" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_MovimentiRipetitivi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,10 +25,12 @@ namespace Iphaser.Agenti.Model
         public Nullable<int> IDCategoria { get; set; }
         public Nullable<int> IDCategoriaIphase { get; set; }
         public string IDCarta { get; set; }
+        public Nullable<int> IDMovimentoRipetitivo { get; set; }
     
         public virtual Carte Carte { get; set; }
         public virtual CategorieUbiBanca CategorieUbiBanca { get; set; }
         public virtual ContiCorrente ContiCorrente { get; set; }
         public virtual CategorieIphase CategorieIphase { get; set; }
+        public virtual MovimentiRipetitivi MovimentiRipetitivi { get; set; }
     }
 }
