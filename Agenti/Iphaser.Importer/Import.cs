@@ -19,8 +19,8 @@ namespace Iphaser.Importer
             ElaboraMovimenti(4923);
             ElaboraMovimenti(1047);
 
-            ElaboraCartaCredito("8470");
-            ElaboraCartaCredito("0517");
+            //ElaboraCartaCredito("8470");
+            //ElaboraCartaCredito("0517");
 
         }
 
@@ -58,7 +58,7 @@ namespace Iphaser.Importer
                                 mov.Importo = -(Decimal.Parse(row[2].ToString().Replace(".", ",")));
                                 mov.Divisa = "EUR";
 
-                                mov.Causale = "";
+                                mov.Causale = "Spese carta di credito";
 
                                 if (context.Keywords.Where(q => mov.Descrizione.ToLower().Trim().Contains(q.Keyword.Trim().ToLower())).Count() == 1)
                                 {
@@ -256,6 +256,19 @@ namespace Iphaser.Importer
             }
         }
 
-        public static 
+        public static void ElaboraMovimentiRipetitivi(string IDConto)
+        {
+            MyMoneyManagerEntities context = new MyMoneyManagerEntities();
+            //movimenti mensili
+            //devo fare qualche operazione ripetitiva ?  (DataFine=NULL)
+            //devo fare qualche operazione ANNUALE ripetitiva in questa data?
+            //devo fare qualche operazione MENSILE ripetitiva in questo giorno del mese?
+            var collection = context.MovimentiRipetitivi.Where(q => q.Frequenza == "MENSILE");
+            foreach (var item in collection)
+            {
+
+            }
+
+        }
     }
 }
