@@ -115,6 +115,9 @@
     <Compile Include="RoleFunction.cs">
       <DependentUpon>MyMoneyManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoMovimento.cs">
+      <DependentUpon>MyMoneyManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="tReportCategorieMeseIpase.cs">
       <DependentUpon>MyMoneyManager.tt</DependentUpon>
     </Compile>

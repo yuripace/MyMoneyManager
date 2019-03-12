@@ -88,6 +88,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="IDCategoriaIphase" Type="int" />
           <Property Name="IDCarta" Type="varchar" MaxLength="50" />
           <Property Name="IDMovimentoRipetitivo" Type="int" />
+          <Property Name="IDTipoMovimento" Type="int" />
         </EntityType>
         <EntityType Name="MovimentiRipetitivi">
           <Key>
@@ -100,6 +101,9 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Importo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IDCategoriaIphase" Type="int" />
           <Property Name="Frequenza" Type="varchar" MaxLength="50" />
+          <Property Name="DataInizio" Type="date" />
+          <Property Name="DataFine" Type="date" />
+          <Property Name="DataUltimaElaborazione" Type="date" />
         </EntityType>
         <EntityType Name="PagamentiIphase">
           <Key>
@@ -125,6 +129,16 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="IDRole_Code" Type="int" />
           <Property Name="IDFunction_Code" Type="int" />
           <Property Name="Permission" Type="smallint" />
+        </EntityType>
+        <EntityType Name="TipoMovimento">
+          <Key>
+            <PropertyRef Name="IDTipoMovimento" />
+          </Key>
+          <Property Name="IDTipoMovimento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="varchar" MaxLength="50" />
+          <Property Name="Rateizzato" Type="smallint" />
+          <Property Name="Rata" Type="smallint" />
+          <Property Name="Ripetitivo" Type="smallint" />
         </EntityType>
         <EntityType Name="tReportCategorieMeseIpase">
           <Key>
@@ -234,6 +248,18 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Movimenti_TipoMovimento">
+          <End Role="TipoMovimento" Type="Self.TipoMovimento" Multiplicity="0..1" />
+          <End Role="Movimenti" Type="Self.Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovimento">
+              <PropertyRef Name="IDTipoMovimento" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDTipoMovimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tReportCategorieMeseIpase_CategorieIphase">
           <End Role="CategorieIphase" Type="Self.CategorieIphase" Multiplicity="0..1" />
           <End Role="tReportCategorieMeseIpase" Type="Self.tReportCategorieMeseIpase" Multiplicity="*" />
@@ -270,6 +296,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <EntitySet Name="PagamentiIphase" EntityType="Self.PagamentiIphase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleFunction" EntityType="Self.RoleFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMovimento" EntityType="Self.TipoMovimento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tReportCategorieMeseIpase" EntityType="Self.tReportCategorieMeseIpase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tReportCategorieMeseUbi" EntityType="Self.tReportCategorieMeseUbi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -307,6 +334,10 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           </AssociationSet>
           <AssociationSet Name="FK_Movimenti_MovimentiRipetitivi" Association="Self.FK_Movimenti_MovimentiRipetitivi">
             <End Role="MovimentiRipetitivi" EntitySet="MovimentiRipetitivi" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimenti_TipoMovimento" Association="Self.FK_Movimenti_TipoMovimento">
+            <End Role="TipoMovimento" EntitySet="TipoMovimento" />
             <End Role="Movimenti" EntitySet="Movimenti" />
           </AssociationSet>
           <AssociationSet Name="FK_tReportCategorieMeseIpase_CategorieIphase" Association="Self.FK_tReportCategorieMeseIpase_CategorieIphase">
@@ -394,6 +425,8 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <NavigationProperty Name="CategorieIphase" Relationship="MyMoneyManagerModel.FK_Movimenti_CategorieIphase" FromRole="Movimenti" ToRole="CategorieIphase" />
           <Property Name="IDMovimentoRipetitivo" Type="Int32" />
           <NavigationProperty Name="MovimentiRipetitivi" Relationship="MyMoneyManagerModel.FK_Movimenti_MovimentiRipetitivi" FromRole="Movimenti" ToRole="MovimentiRipetitivi" />
+          <Property Name="IDTipoMovimento" Type="Int32" />
+          <NavigationProperty Name="TipoMovimento" Relationship="MyMoneyManagerModel.FK_Movimenti_TipoMovimento" FromRole="Movimenti" ToRole="TipoMovimento" />
         </EntityType>
         <EntityType Name="PagamentiIphase">
           <Key>
@@ -579,6 +612,11 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             <End Role="MovimentiRipetitivi" EntitySet="MovimentiRipetitivi" />
             <End Role="Movimenti" EntitySet="Movimenti" />
           </AssociationSet>
+          <EntitySet Name="TipoMovimento" EntityType="MyMoneyManagerModel.TipoMovimento" />
+          <AssociationSet Name="FK_Movimenti_TipoMovimento" Association="MyMoneyManagerModel.FK_Movimenti_TipoMovimento">
+            <End Role="TipoMovimento" EntitySet="TipoMovimento" />
+            <End Role="Movimenti" EntitySet="Movimenti" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Movimenti_CategorieIphase">
           <End Type="MyMoneyManagerModel.CategorieIphase" Role="CategorieIphase" Multiplicity="0..1" />
@@ -625,6 +663,9 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <Property Name="Frequenza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Movimenti" Relationship="MyMoneyManagerModel.FK_Movimenti_MovimentiRipetitivi" FromRole="MovimentiRipetitivi" ToRole="Movimenti" />
           <Property Name="Descrizione" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DataInizio" Type="DateTime" Precision="0" />
+          <Property Name="DataFine" Type="DateTime" Precision="0" />
+          <Property Name="DataUltimaElaborazione" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Movimenti_MovimentiRipetitivi">
           <End Type="MyMoneyManagerModel.MovimentiRipetitivi" Role="MovimentiRipetitivi" Multiplicity="0..1" />
@@ -635,6 +676,29 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
             </Principal>
             <Dependent Role="Movimenti">
               <PropertyRef Name="IDMovimentoRipetitivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoMovimento">
+          <Key>
+            <PropertyRef Name="IDTipoMovimento" />
+          </Key>
+          <Property Name="IDTipoMovimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rateizzato" Type="Int16" />
+          <Property Name="Rata" Type="Int16" />
+          <Property Name="Ripetitivo" Type="Int16" />
+          <NavigationProperty Name="Movimenti" Relationship="MyMoneyManagerModel.FK_Movimenti_TipoMovimento" FromRole="TipoMovimento" ToRole="Movimenti" />
+        </EntityType>
+        <Association Name="FK_Movimenti_TipoMovimento">
+          <End Type="MyMoneyManagerModel.TipoMovimento" Role="TipoMovimento" Multiplicity="0..1" />
+          <End Type="MyMoneyManagerModel.Movimenti" Role="Movimenti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovimento">
+              <PropertyRef Name="IDTipoMovimento" />
+            </Principal>
+            <Dependent Role="Movimenti">
+              <PropertyRef Name="IDTipoMovimento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -696,6 +760,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <EntitySetMapping Name="Movimenti">
             <EntityTypeMapping TypeName="MyMoneyManagerModel.Movimenti">
               <MappingFragment StoreEntitySet="Movimenti">
+                <ScalarProperty Name="IDTipoMovimento" ColumnName="IDTipoMovimento" />
                 <ScalarProperty Name="IDMovimentoRipetitivo" ColumnName="IDMovimentoRipetitivo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
@@ -804,6 +869,9 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
           <EntitySetMapping Name="MovimentiRipetitivi">
             <EntityTypeMapping TypeName="MyMoneyManagerModel.MovimentiRipetitivi">
               <MappingFragment StoreEntitySet="MovimentiRipetitivi">
+                <ScalarProperty Name="DataUltimaElaborazione" ColumnName="DataUltimaElaborazione" />
+                <ScalarProperty Name="DataFine" ColumnName="DataFine" />
+                <ScalarProperty Name="DataInizio" ColumnName="DataInizio" />
                 <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
                 <ScalarProperty Name="Frequenza" ColumnName="Frequenza" />
                 <ScalarProperty Name="IDCategoriaIphase" ColumnName="IDCategoriaIphase" />
@@ -811,6 +879,17 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'My
                 <ScalarProperty Name="DataScadenza" ColumnName="DataScadenza" />
                 <ScalarProperty Name="IDContoCorrente" ColumnName="IDContoCorrente" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMovimento">
+            <EntityTypeMapping TypeName="MyMoneyManagerModel.TipoMovimento">
+              <MappingFragment StoreEntitySet="TipoMovimento">
+                <ScalarProperty Name="Ripetitivo" ColumnName="Ripetitivo" />
+                <ScalarProperty Name="Rata" ColumnName="Rata" />
+                <ScalarProperty Name="Rateizzato" ColumnName="Rateizzato" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="IDTipoMovimento" ColumnName="IDTipoMovimento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -35,36 +35,42 @@
                             <th>
                                 ContiCorrente
                             </th>
+                            <th>
+                                Tipo
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Where(q => q.IDCategoriaIphase < 0))
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DataValuta)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Importo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Descrizione)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Causale)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CategorieIphase.Descrizione)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ContiCorrente.Descrizione)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataValuta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Importo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descrizione)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Causale)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategorieIphase.Descrizione)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContiCorrente.Descrizione)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoMovimento.Descrizione)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                            </td>
+                        </tr>
                         }
                     </tbody>
                     <tfoot class="filters">
@@ -88,6 +94,9 @@
                             </th>
                             <th>
                                 ContiCorrente
+                            </th>
+                            <th>
+                                Tipo
                             </th>
                             <th></th>
                         </tr>
@@ -113,6 +122,9 @@
                             </th>
                             <th>
                                 ContiCorrente
+                            </th>
+                            <th>
+                                Tipo
                             </th>
                             <th></th>
                         </tr>

@@ -12,24 +12,19 @@ namespace MyMoneyManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MovimentiRipetitivi
+    public partial class TipoMovimento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MovimentiRipetitivi()
+        public TipoMovimento()
         {
             this.Movimenti = new HashSet<Movimenti>();
         }
     
-        public int ID { get; set; }
-        public Nullable<int> IDContoCorrente { get; set; }
-        public Nullable<System.DateTime> DataScadenza { get; set; }
-        public Nullable<decimal> Importo { get; set; }
-        public Nullable<int> IDCategoriaIphase { get; set; }
-        public string Frequenza { get; set; }
+        public int IDTipoMovimento { get; set; }
         public string Descrizione { get; set; }
-        public Nullable<System.DateTime> DataInizio { get; set; }
-        public Nullable<System.DateTime> DataFine { get; set; }
-        public Nullable<System.DateTime> DataUltimaElaborazione { get; set; }
+        public Nullable<short> Rateizzato { get; set; }
+        public Nullable<short> Rata { get; set; }
+        public Nullable<short> Ripetitivo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimenti> Movimenti { get; set; }

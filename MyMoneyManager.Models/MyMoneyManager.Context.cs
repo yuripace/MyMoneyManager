@@ -40,5 +40,6 @@ namespace MyMoneyManager.Models
         public virtual DbSet<Log4Net> Log4Net { get; set; }
         public virtual DbSet<Keywords> Keywords { get; set; }
         public virtual DbSet<MovimentiRipetitivi> MovimentiRipetitivi { get; set; }
+        public virtual DbSet<TipoMovimento> TipoMovimento { get; set; }
     }
 }

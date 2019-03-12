@@ -28,6 +28,8 @@
         <AssociationConnector Association="MyMoneyManagerModel.FK_Keywords_CategorieIphase" />
         <EntityTypeShape EntityType="MyMoneyManagerModel.MovimentiRipetitivi" Width="1.5" PointX="0.75" PointY="11.75" />
         <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_MovimentiRipetitivi" />
+        <EntityTypeShape EntityType="MyMoneyManagerModel.TipoMovimento" Width="1.5" PointX="3.375" PointY="11.875" />
+        <AssociationConnector Association="MyMoneyManagerModel.FK_Movimenti_TipoMovimento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

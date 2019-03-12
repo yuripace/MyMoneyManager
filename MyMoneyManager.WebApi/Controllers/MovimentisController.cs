@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyMoneyManager.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using MyMoneyManager.Models;
 
 namespace MyMoneyManager.WebApi.Controllers
 {
@@ -18,14 +15,14 @@ namespace MyMoneyManager.WebApi.Controllers
         // GET: Movimentis
         public async Task<ActionResult> Index()
         {
-            var movimenti = db.Movimenti.Include(m => m.Carte).Include(m => m.CategorieUbiBanca).Include(m => m.ContiCorrente).Include(m => m.CategorieIphase);
+            var movimenti = db.Movimenti.Include(m => m.Carte).Include(m => m.CategorieUbiBanca).Include(m => m.ContiCorrente).Include(m => m.CategorieIphase).Include(m => m.TipoMovimento);
             return View(await movimenti.ToListAsync());
         }
 
         // GET: Movimentis
         public async Task<ActionResult> DaCompilareIndex()
         {
-            var movimenti = db.Movimenti.Where(m => m.IDCategoriaIphase == -1).Include(m => m.Carte).Include(m => m.CategorieUbiBanca).Include(m => m.ContiCorrente).Include(m => m.CategorieIphase);
+            var movimenti = db.Movimenti.Where(m => m.IDCategoriaIphase == -1).Include(m => m.Carte).Include(m => m.CategorieUbiBanca).Include(m => m.ContiCorrente).Include(m => m.CategorieIphase).Include(m => m.TipoMovimento);
             return View(await movimenti.ToListAsync());
         }
 
@@ -51,6 +48,7 @@ namespace MyMoneyManager.WebApi.Controllers
             ViewBag.IDCategoria = new SelectList(db.CategorieUbiBanca, "ID", "Descrizione");
             ViewBag.IDContoCorrente = new SelectList(db.ContiCorrente, "ID", "Descrizione");
             ViewBag.IDCategoriaIphase = new SelectList(db.CategorieIphase, "IDVoce", "Descrizione");
+            ViewBag.IDTipoMovimento = new SelectList(db.TipoMovimento, "IDTipoMovimento", "Descrizione");
             return View();
         }
 
@@ -72,6 +70,7 @@ namespace MyMoneyManager.WebApi.Controllers
             ViewBag.IDCategoria = new SelectList(db.CategorieUbiBanca, "ID", "Descrizione", movimenti.IDCategoria);
             ViewBag.IDContoCorrente = new SelectList(db.ContiCorrente, "ID", "Descrizione", movimenti.IDContoCorrente);
             ViewBag.IDCategoriaIphase = new SelectList(db.CategorieIphase, "IDVoce", "Descrizione", movimenti.IDCategoriaIphase);
+            ViewBag.IDTipoMovimento = new SelectList(db.TipoMovimento, "IDTipoMovimento", "Descrizione", movimenti.IDTipoMovimento);
             return View(movimenti);
         }
 
@@ -91,6 +90,8 @@ namespace MyMoneyManager.WebApi.Controllers
             ViewBag.IDCategoria = new SelectList(db.CategorieUbiBanca, "ID", "Descrizione", movimenti.IDCategoria);
             ViewBag.IDContoCorrente = new SelectList(db.ContiCorrente, "ID", "Descrizione", movimenti.IDContoCorrente);
             ViewBag.IDCategoriaIphase = new SelectList(db.CategorieIphase, "IDVoce", "Descrizione", movimenti.IDCategoriaIphase);
+            ViewBag.IDTipoMovimento = new SelectList(db.TipoMovimento, "IDTipoMovimento", "Descrizione", movimenti.IDTipoMovimento);
+            ViewBag.id = new SelectList(db.CategorieIphase, "IDVoce", "Descrizione", movimenti.IDCategoriaIphase);
             return View(movimenti);
         }
 
@@ -99,7 +100,7 @@ namespace MyMoneyManager.WebApi.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,IDContoCorrente,DataContabile,DataValuta,Importo,Divisa,Descrizione,Causale,IDCategoria,IDCategoriaIphase,IDCarta")] Movimenti movimenti)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,IDContoCorrente,DataContabile,DataValuta,Importo,Divisa,Descrizione,Causale,IDCategoria,IDCategoriaIphase,IDCarta,IDTipoMovimento")] Movimenti movimenti)
         {
             if (ModelState.IsValid)
             {
@@ -111,6 +112,7 @@ namespace MyMoneyManager.WebApi.Controllers
             ViewBag.IDCategoria = new SelectList(db.CategorieUbiBanca, "ID", "Descrizione", movimenti.IDCategoria);
             ViewBag.IDContoCorrente = new SelectList(db.ContiCorrente, "ID", "Descrizione", movimenti.IDContoCorrente);
             ViewBag.IDCategoriaIphase = new SelectList(db.CategorieIphase, "IDVoce", "Descrizione", movimenti.IDCategoriaIphase);
+            ViewBag.IDTipoMovimento = new SelectList(db.TipoMovimento, "IDTipoMovimento", "Descrizione", movimenti.IDTipoMovimento);
             return View(movimenti);
         }
 
